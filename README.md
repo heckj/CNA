@@ -16,7 +16,7 @@ FontAwesome
 - https://medium.com/@umairhassanbaig/ios-how-to-use-font-awesome-in-xcode-project-b8ef255973a3
 - cheatsheet: https://origin.fontawesome.com/cheatsheet
   
-Network.framework
+Network.framework (IOS12+ only...)
 
 - establishing and monitoring network paths (the new stuff)
 - https://developer.apple.com/documentation/network/nwpathmonitor
