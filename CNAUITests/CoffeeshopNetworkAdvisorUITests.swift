@@ -1,6 +1,6 @@
 //
-//  Coffeeshop_Network_AdvisorUITests.swift
-//  Coffeeshop Network AdvisorUITests
+//  CoffeeshopNetworkAdvisorUITests.swift
+//  CoffeeshopNetworkAdvisorUITests
 //
 //  Created by Joseph Heck on 3/9/19.
 //  Copyright © 2019 BackDrop. All rights reserved.
