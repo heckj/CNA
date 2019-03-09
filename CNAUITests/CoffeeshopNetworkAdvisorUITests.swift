@@ -8,7 +8,7 @@
 
 import XCTest
 
-class Coffeeshop_Network_AdvisorUITests: XCTestCase {
+class CoffeeshopNetworkAdvisorUITests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

@@ -1,27 +1,26 @@
 //
-//  Coffeeshop_Network_AdvisorTests.swift
+//  CoffeeshopNetworkAdvisorTests.swift
 //  Coffeeshop Network AdvisorTests
 //
 //  Created by Joseph Heck on 3/9/19.
-//  Copyright © 2019 BackDrop. All rights reserved.
 //
 
+@testable import CNA
 import XCTest
-@testable import Coffeeshop_Network_Advisor
 
-class Coffeeshop_Network_AdvisorTests: XCTestCase {
-
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+class CoffeeshopNetworkAdvisorTests: XCTestCase {
+//    override func setUp() {
+//        // Put setup code here. This method is called before the invocation of each test method in the class.
+//    }
+//
+//    override func tearDown() {
+//        // Put teardown code here. This method is called after the invocation of each test method in the class.
+//    }
 
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        XCTAssert(true)
     }
 
     func testPerformanceExample() {
@@ -30,5 +29,4 @@ class Coffeeshop_Network_AdvisorTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-
 }
