@@ -1,5 +1,6 @@
 Packages
 .build
+build/
 xcuserdata
 DerivedData/
 .DS_Store
