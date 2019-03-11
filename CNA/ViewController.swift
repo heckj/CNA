@@ -12,6 +12,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
     var dataTask: URLSessionDataTask?
     @IBOutlet weak private var overallAccessView: UIView!
     @IBOutlet weak private var overallAccessLabel: UILabel!
+    @IBOutlet weak private var diagnosticText: UITextView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
