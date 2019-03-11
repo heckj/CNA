@@ -6,6 +6,7 @@
 //
 
 import Network
+import SystemConfiguration.CaptiveNetwork
 import UIKit
 
 class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelegate {
@@ -14,10 +15,25 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
     @IBOutlet weak private var overallAccessLabel: UILabel!
     @IBOutlet weak private var diagnosticText: UITextView!
 
+    private func getwifi() {
+        // https://developer.apple.com/documentation/systemconfiguration/1614126-cncopycurrentnetworkinfo?language=objc
+        // ref: https://stackoverflow.com/questions/31755692/swift-cncopysupportedinterfaces-not-valid
+        // (cause Apple's docs on how to use this are shit)
+        let arrayOfInterfaces = CNCopySupportedInterfaces()
+        // returns 'nil' on the simulator...
+        if let arrayOfInterfaces = arrayOfInterfaces as? [CFString] {
+            for interface in arrayOfInterfaces {
+                let foo = CNCopyCurrentNetworkInfo(interface)
+                print("Wifi information: ", foo as Any)
+            }
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         print("View Loaded!")
 
+        self.getwifi()
         // Do any additional setup after loading the view, typically from a nib.
         let monitor = NWPathMonitor(requiredInterfaceType: .wifi)
         let queue = DispatchQueue(label: "netmonitor")

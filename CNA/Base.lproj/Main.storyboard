@@ -60,7 +60,6 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Aex-r1-92E" secondAttribute="trailing" constant="16" id="Anu-L2-cRn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="XKP-V7-k8e" secondAttribute="bottom" constant="20" id="MCg-cV-rtq"/>
-                            <constraint firstItem="Aex-r1-92E" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Rci-yF-EEj"/>
                             <constraint firstItem="Aex-r1-92E" firstAttribute="leading" secondItem="XKP-V7-k8e" secondAttribute="leading" id="aXA-hQ-2Y7"/>
                             <constraint firstItem="XKP-V7-k8e" firstAttribute="top" secondItem="Aex-r1-92E" secondAttribute="bottom" constant="1" id="fpW-0I-KTc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kQp-FQ-i2D" secondAttribute="trailing" constant="16.5" id="hhb-Tb-FKd"/>
