@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelegate {
     var dataTask: URLSessionDataTask?
+    @IBOutlet weak private var overallAccessView: UIView!
+    @IBOutlet weak private var overallAccessLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,21 +25,26 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
             if path.status == .satisfied {
                 print(path.debugDescription, "is expensive? ", path.isExpensive, "is connected")
                 DispatchQueue.main.async { [weak self] in
-                    self?.view.backgroundColor = UIColor.green
+                    self?.overallAccessView.backgroundColor = UIColor.green
+                    self?.overallAccessLabel.text = "Internet available"
                 }
             } else {
                 print(path.debugDescription, "is expensive? ", path.isExpensive, "is disconnected")
                 DispatchQueue.main.async { [weak self] in
-                    self?.view.backgroundColor = UIColor.red
+                    self?.overallAccessView.backgroundColor = UIColor.red
+                    self?.overallAccessLabel.text = "No Internet access"
                 }
             }
         }
 
         let configuration = URLSessionConfiguration.ephemeral
         configuration.timeoutIntervalForResource = 1
+        configuration.allowsCellularAccess = false
+        configuration.waitsForConnectivity = false
+        configuration.tlsMinimumSupportedProtocol = .sslProtocolAll
         let session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
 
-        guard let url = URL(string: "https://www.google.com/") else {
+        guard let url = URL(string: "http://192.168.1.1/") else {
             print("Couldn't make this URL")
             return
         }
@@ -68,23 +75,28 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
                     task: URLSessionTask,
                     didFinishCollecting metrics: URLSessionTaskMetrics) {
         // check the metrics
-        print("task interval was: ", metrics.taskInterval)
+        print("task duration (ms): ", metrics.taskInterval.duration * 1000)
         print("redirect count was: ", metrics.redirectCount)
         print("details...")
         let transactionMetricsList = metrics.transactionMetrics
         for metric in transactionMetricsList {
             print("request ", metric.request.debugDescription)
-            print("to ", metric.request.url!)
             print("fetchStart ", metric.fetchStartDate!)
             // some of the rest of this may not actually exist if the request fails... need to check nils...
-            print("domainLookupStartDate ", metric.domainLookupStartDate!)
-            print("domainLookupEndDate ", metric.domainLookupEndDate!)
-            print("connectStartDate ", metric.connectStartDate!)
-            print("connectEndDate ", metric.connectEndDate!)
-            print("requeststart ", metric.requestStartDate!)
-            print("requestEnd ", metric.requestEndDate!)
-            print("responseStart ", metric.responseStartDate!)
-            print("responseEnd ", metric.responseEndDate!)
+
+            if let domainStart = metric.domainLookupStartDate,
+                let domainEnd = metric.domainLookupEndDate,
+                let connectStart = metric.connectStartDate,
+                let connectEnd = metric.connectEndDate,
+                let requestStart = metric.connectStartDate,
+                let requestEnd = metric.connectEndDate,
+                let responseStart = metric.responseStartDate,
+                let responseEnd = metric.responseEndDate {
+                print("domainDuration (ms) ", domainEnd.timeIntervalSince(domainStart) * 1000)
+                print("connectDuration (ms) ", connectEnd.timeIntervalSince(connectStart) * 1000)
+                print("requestDuration (ms) ", requestEnd.timeIntervalSince(requestStart) * 1000)
+                print("responseDuration (ms) ", responseEnd.timeIntervalSince(responseStart) * 1000)
+            }
         }
     }
 }
