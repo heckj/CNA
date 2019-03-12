@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A149AF422384B2900E5168B /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A149AEB22384AD300E5168B /* Charts.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		1A149AF522384B2900E5168B /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1A149AEB22384AD300E5168B /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1A5AC7FB223469E700D388F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AC7FA223469E700D388F4 /* AppDelegate.swift */; };
 		1A5AC7FD223469E700D388F4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AC7FC223469E700D388F4 /* ViewController.swift */; };
 		1A5AC800223469E700D388F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A5AC7FE223469E700D388F4 /* Main.storyboard */; };
@@ -18,6 +16,8 @@
 		1A5AC81B223469E800D388F4 /* CoffeeshopNetworkAdvisorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AC81A223469E800D388F4 /* CoffeeshopNetworkAdvisorUITests.swift */; };
 		1A5AC82B22346E3700D388F4 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5AC82A22346E3700D388F4 /* NetworkExtension.framework */; };
 		1A65D717223470F600A6E9BE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A65D716223470F600A6E9BE /* Default-568h@2x.png */; };
+		1ACB9BD022385281009DE3BE /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A149AEB22384AD300E5168B /* Charts.framework */; };
+		1ACB9BD122385281009DE3BE /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1A149AEB22384AD300E5168B /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1AF88253223830DC00D49A66 /* SwiftyPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF88252223830DC00D49A66 /* SwiftyPing.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,13 +36,6 @@
 			remoteGlobalIDString = 1CBBC58C6CE1EBEE9852CE41;
 			remoteInfo = ChartsTests;
 		};
-		1A149AF622384B2900E5168B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1A149AE522384AD300E5168B /* Charts.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = A58A4ED274A941CA248EA921;
-			remoteInfo = Charts;
-		};
 		1A5AC80C223469E800D388F4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A5AC7EF223469E700D388F4 /* Project object */;
@@ -57,16 +50,23 @@
 			remoteGlobalIDString = 1A5AC7F6223469E700D388F4;
 			remoteInfo = "Coffeeshop Network Advisor";
 		};
+		1ACB9BD222385281009DE3BE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A149AE522384AD300E5168B /* Charts.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A58A4ED274A941CA248EA921;
+			remoteInfo = Charts;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		1A149AF822384B2900E5168B /* Embed Frameworks */ = {
+		1ACB9BD422385282009DE3BE /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1A149AF522384B2900E5168B /* Charts.framework in Embed Frameworks */,
+				1ACB9BD122385281009DE3BE /* Charts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -101,7 +101,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A5AC82B22346E3700D388F4 /* NetworkExtension.framework in Frameworks */,
-				1A149AF422384B2900E5168B /* Charts.framework in Frameworks */,
+				1ACB9BD022385281009DE3BE /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,12 +208,12 @@
 				1A65D7192234720200A6E9BE /* ShellScript */,
 				1A5AC7F4223469E700D388F4 /* Frameworks */,
 				1A5AC7F5223469E700D388F4 /* Resources */,
-				1A149AF822384B2900E5168B /* Embed Frameworks */,
+				1ACB9BD422385282009DE3BE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1A149AF722384B2900E5168B /* PBXTargetDependency */,
+				1ACB9BD322385281009DE3BE /* PBXTargetDependency */,
 			);
 			name = CNA;
 			productName = "Coffeeshop Network Advisor";
@@ -409,11 +409,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1A149AF722384B2900E5168B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Charts;
-			targetProxy = 1A149AF622384B2900E5168B /* PBXContainerItemProxy */;
-		};
 		1A5AC80D223469E800D388F4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1A5AC7F6223469E700D388F4 /* CNA */;
@@ -423,6 +418,11 @@
 			isa = PBXTargetDependency;
 			target = 1A5AC7F6223469E700D388F4 /* CNA */;
 			targetProxy = 1A5AC817223469E800D388F4 /* PBXContainerItemProxy */;
+		};
+		1ACB9BD322385281009DE3BE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Charts;
+			targetProxy = 1ACB9BD222385281009DE3BE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

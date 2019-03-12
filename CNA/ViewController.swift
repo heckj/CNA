@@ -5,6 +5,7 @@
 //  Created by Joseph Heck on 3/9/19.
 //
 
+import Charts
 import Network
 import SystemConfiguration.CaptiveNetwork
 import UIKit
