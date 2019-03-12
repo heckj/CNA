@@ -9,11 +9,31 @@ import Network
 import SystemConfiguration.CaptiveNetwork
 import UIKit
 
+import CFNetwork.CFNetDiagnostics
+
 class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelegate {
     var dataTask: URLSessionDataTask?
     @IBOutlet weak private var overallAccessView: UIView!
     @IBOutlet weak private var overallAccessLabel: UILabel!
     @IBOutlet weak private var diagnosticText: UITextView!
+    @IBOutlet weak private var textView: UITextView!
+
+    // DIAGNOSTIC ENVIRONMENT VARIABLE: CFNETWORK_DIAGNOSTICS
+    // set to 0, 1, 2, or 3 - increasing for more diagnostic information from CFNetwork
+
+    private func startPinging() {
+        let ping = SwiftyPing(host: "192.168.1.1",
+                              configuration: PingConfiguration(interval: 1),
+                              queue: DispatchQueue.global())
+        ping?.observer = { ping, response in
+            DispatchQueue.main.async {
+                self.textView.text.append(
+                    contentsOf: "\nPing #\(response.sequenceNumber): \(response.duration * 1000) ms")
+                self.textView.scrollRangeToVisible(NSRange(location: self.textView.text.count - 1, length: 1))
+            }
+        }
+        ping?.start()
+    }
 
     private func getwifi() {
         // https://developer.apple.com/documentation/systemconfiguration/1614126-cncopycurrentnetworkinfo?language=objc
@@ -27,13 +47,45 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
                 print("Wifi information: ", foo as Any)
             }
         }
+
+        guard let unwrappedCFArrayInterfaces = CNCopySupportedInterfaces() else {
+            print("this must be a simulator, no interfaces found")
+            return
+        }
+        guard let swiftInterfaces = (unwrappedCFArrayInterfaces as NSArray) as? [String] else {
+            print("System error: did not come back as array of Strings")
+            return
+        }
+        for interface in swiftInterfaces {
+            print("Looking up SSID info for \(interface)") // en0
+            guard let unwrappedCFDictionaryForInterface = CNCopyCurrentNetworkInfo(interface as CFString) else {
+                print("System error: \(interface) has no information")
+                return
+            }
+            guard let SSIDDict = (unwrappedCFDictionaryForInterface as NSDictionary) as? [String: AnyObject] else {
+                print("System error: interface information is not a string-keyed dictionary")
+                return
+            }
+            for dictionaryKey in SSIDDict.keys {
+                print("\(dictionaryKey): \(SSIDDict[dictionaryKey]!)")
+            }
+        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.timeoutIntervalForResource = 1
+        configuration.allowsCellularAccess = false
+        configuration.waitsForConnectivity = false
+        configuration.tlsMinimumSupportedProtocol = .sslProtocolAll
+        let session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+
         print("View Loaded!")
 
         self.getwifi()
+        self.startPinging()
         // Do any additional setup after loading the view, typically from a nib.
         let monitor = NWPathMonitor(requiredInterfaceType: .wifi)
         let queue = DispatchQueue(label: "netmonitor")
@@ -54,14 +106,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
             }
         }
 
-        let configuration = URLSessionConfiguration.ephemeral
-        configuration.timeoutIntervalForResource = 1
-        configuration.allowsCellularAccess = false
-        configuration.waitsForConnectivity = false
-        configuration.tlsMinimumSupportedProtocol = .sslProtocolAll
-        let session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
-
-        guard let url = URL(string: "http://192.168.1.1/") else {
+        guard let url = URL(string: "https://192.168.1.1/") else {
             print("Couldn't make this URL")
             return
         }
