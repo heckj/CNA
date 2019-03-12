@@ -16,6 +16,10 @@ FontAwesome
 - https://medium.com/@umairhassanbaig/ios-how-to-use-font-awesome-in-xcode-project-b8ef255973a3
 - cheatsheet: https://origin.fontawesome.com/cheatsheet
   
+ICMP Ping with Swift
+
+- https://github.com/imas145/SwiftyPing
+
 Network.framework (IOS12+ only...)
 
 - establishing and monitoring network paths (the new stuff)

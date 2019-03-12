@@ -9,8 +9,6 @@ import Network
 import SystemConfiguration.CaptiveNetwork
 import UIKit
 
-import CFNetwork.CFNetDiagnostics
-
 class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelegate {
     var dataTask: URLSessionDataTask?
     @IBOutlet weak private var overallAccessView: UIView!
@@ -72,21 +70,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        let configuration = URLSessionConfiguration.ephemeral
-        configuration.timeoutIntervalForResource = 1
-        configuration.allowsCellularAccess = false
-        configuration.waitsForConnectivity = false
-        configuration.tlsMinimumSupportedProtocol = .sslProtocolAll
-        let session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
-
-        print("View Loaded!")
-
-        self.getwifi()
-        self.startPinging()
-        // Do any additional setup after loading the view, typically from a nib.
+    private func monitorNWPath() {
         let monitor = NWPathMonitor(requiredInterfaceType: .wifi)
         let queue = DispatchQueue(label: "netmonitor")
         monitor.start(queue: queue)
@@ -105,6 +89,27 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
                 }
             }
         }
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+
+        self.getwifi()
+        self.startPinging()
+        self.monitorNWPath()
+
+        let urlRequestQueue = OperationQueue()
+        urlRequestQueue.name = "urlRequests"
+        urlRequestQueue.qualityOfService = .userInteractive
+
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.timeoutIntervalForResource = 1
+        configuration.allowsCellularAccess = false
+        configuration.waitsForConnectivity = false
+        configuration.tlsMinimumSupportedProtocol = .sslProtocolAll
+        let session = URLSession(configuration: configuration,
+                                 delegate: self,
+                                 delegateQueue: urlRequestQueue)
 
         guard let url = URL(string: "https://192.168.1.1/") else {
             print("Couldn't make this URL")
