@@ -4,6 +4,13 @@ Coffeeshop Network Advisor
 
 Review and advise on the network connectivity status for my favorite local coffee shop
 
+## Project Setup
+
+get the dependencies established for the project:
+
+    git submodule init
+    git submodule update
+
 ## Developer Reading
 
 App Extensions (making a "Today" Widget)
@@ -15,7 +22,7 @@ FontAwesome
 - notes on using FontAwesome (4/5) in an IOS project (outside of SVG's in assets)
 - https://medium.com/@umairhassanbaig/ios-how-to-use-font-awesome-in-xcode-project-b8ef255973a3
 - cheatsheet: https://origin.fontawesome.com/cheatsheet
-  
+
 ICMP Ping with Swift
 
 - https://github.com/imas145/SwiftyPing
@@ -37,7 +44,7 @@ Connectivity
 
 - https://medium.com/@rwbutler/nwpathmonitor-the-new-reachability-de101a5a8835
 - https://github.com/rwbutler/Connectivity
-  
+
 Charting
 
 - https://github.com/annalizhaz/ChartsForSwiftBasic

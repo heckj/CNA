@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A149AF422384B2900E5168B /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A149AEB22384AD300E5168B /* Charts.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		1A149AF522384B2900E5168B /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1A149AEB22384AD300E5168B /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1A5AC7FB223469E700D388F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AC7FA223469E700D388F4 /* AppDelegate.swift */; };
 		1A5AC7FD223469E700D388F4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AC7FC223469E700D388F4 /* ViewController.swift */; };
 		1A5AC800223469E700D388F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A5AC7FE223469E700D388F4 /* Main.storyboard */; };
@@ -20,6 +22,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1A149AEA22384AD300E5168B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A149AE522384AD300E5168B /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65AD9E95D9ED4DC0BD73A743;
+			remoteInfo = Charts;
+		};
+		1A149AEC22384AD300E5168B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A149AE522384AD300E5168B /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1CBBC58C6CE1EBEE9852CE41;
+			remoteInfo = ChartsTests;
+		};
+		1A149AF622384B2900E5168B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A149AE522384AD300E5168B /* Charts.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A58A4ED274A941CA248EA921;
+			remoteInfo = Charts;
+		};
 		1A5AC80C223469E800D388F4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A5AC7EF223469E700D388F4 /* Project object */;
@@ -36,7 +59,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1A149AF822384B2900E5168B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1A149AF522384B2900E5168B /* Charts.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		1A149AE522384AD300E5168B /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = dependencies/IOSCharts/Charts.xcodeproj; sourceTree = "<group>"; };
 		1A36F831223476120022F18F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; lineEnding = 0; path = README.md; sourceTree = "<group>"; };
 		1A5AC7F7223469E700D388F4 /* CNA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CNA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A5AC7FA223469E700D388F4 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +101,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A5AC82B22346E3700D388F4 /* NetworkExtension.framework in Frameworks */,
+				1A149AF422384B2900E5168B /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,10 +122,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A149AE622384AD300E5168B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1A149AEB22384AD300E5168B /* Charts.framework */,
+				1A149AED22384AD300E5168B /* ChartsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		1A5AC7EE223469E700D388F4 = {
 			isa = PBXGroup;
 			children = (
 				1A36F831223476120022F18F /* README.md */,
+				1A149AE522384AD300E5168B /* Charts.xcodeproj */,
 				1A5AC7F9223469E700D388F4 /* CNA */,
 				1A5AC80E223469E800D388F4 /* CNATests */,
 				1A5AC819223469E800D388F4 /* CNAUITests */,
@@ -159,10 +208,12 @@
 				1A65D7192234720200A6E9BE /* ShellScript */,
 				1A5AC7F4223469E700D388F4 /* Frameworks */,
 				1A5AC7F5223469E700D388F4 /* Resources */,
+				1A149AF822384B2900E5168B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1A149AF722384B2900E5168B /* PBXTargetDependency */,
 			);
 			name = CNA;
 			productName = "Coffeeshop Network Advisor";
@@ -248,6 +299,12 @@
 			mainGroup = 1A5AC7EE223469E700D388F4;
 			productRefGroup = 1A5AC7F8223469E700D388F4 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1A149AE622384AD300E5168B /* Products */;
+					ProjectRef = 1A149AE522384AD300E5168B /* Charts.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1A5AC7F6223469E700D388F4 /* CNA */,
@@ -256,6 +313,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1A149AEB22384AD300E5168B /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = 1A149AEA22384AD300E5168B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1A149AED22384AD300E5168B /* ChartsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ChartsTests.xctest;
+			remoteRef = 1A149AEC22384AD300E5168B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1A5AC7F5223469E700D388F4 /* Resources */ = {
@@ -335,6 +409,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1A149AF722384B2900E5168B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Charts;
+			targetProxy = 1A149AF622384B2900E5168B /* PBXContainerItemProxy */;
+		};
 		1A5AC80D223469E800D388F4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1A5AC7F6223469E700D388F4 /* CNA */;
@@ -499,6 +578,7 @@
 		1A5AC820223469E800D388F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CNA/CNA.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -518,6 +598,7 @@
 		1A5AC821223469E800D388F4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CNA/CNA.entitlements;
 				CODE_SIGN_STYLE = Automatic;

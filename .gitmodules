@@ -1,0 +1,3 @@
+[submodule "dependencies/IOSCharts"]
+	path = dependencies/IOSCharts
+	url = git@github.com:heckj/IOSCharts.git
