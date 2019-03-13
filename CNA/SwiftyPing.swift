@@ -386,7 +386,7 @@ struct ICMPHeader {
 
 enum ICMPType: UInt8 {
     case echoReply = 0           // code is always 0
-    case echoRequest = 8            // code is always 0
+    case echoRequest = 8         // code is always 8
 }
 
 // static inline uint16_t in_cksum(const void *buffer, size_t bufferLen)
