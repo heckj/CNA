@@ -18,6 +18,7 @@
 		1A65D717223470F600A6E9BE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A65D716223470F600A6E9BE /* Default-568h@2x.png */; };
 		1A67549F22395A85005AA0E0 /* PulseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A67549E22395A85005AA0E0 /* PulseView.xib */; };
 		1A6754A222395B4F005AA0E0 /* CNAPulseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6754A122395B4F005AA0E0 /* CNAPulseView.swift */; };
+		1A6754A422396652005AA0E0 /* CNAButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6754A322396652005AA0E0 /* CNAButton.swift */; };
 		1ACB9BD022385281009DE3BE /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A149AEB22384AD300E5168B /* Charts.framework */; };
 		1ACB9BD122385281009DE3BE /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1A149AEB22384AD300E5168B /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1AF88253223830DC00D49A66 /* SwiftyPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF88252223830DC00D49A66 /* SwiftyPing.swift */; };
@@ -96,6 +97,7 @@
 		1A65D7182234713500A6E9BE /* CNA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CNA.entitlements; sourceTree = "<group>"; };
 		1A67549E22395A85005AA0E0 /* PulseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PulseView.xib; sourceTree = "<group>"; };
 		1A6754A122395B4F005AA0E0 /* CNAPulseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNAPulseView.swift; sourceTree = "<group>"; };
+		1A6754A322396652005AA0E0 /* CNAButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNAButton.swift; sourceTree = "<group>"; };
 		1AF88252223830DC00D49A66 /* SwiftyPing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyPing.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -173,6 +175,7 @@
 				1A5AC806223469E800D388F4 /* Info.plist */,
 				1A67549E22395A85005AA0E0 /* PulseView.xib */,
 				1A6754A122395B4F005AA0E0 /* CNAPulseView.swift */,
+				1A6754A322396652005AA0E0 /* CNAButton.swift */,
 			);
 			path = CNA;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				1A5AC7FD223469E700D388F4 /* ViewController.swift in Sources */,
 				1A5AC7FB223469E700D388F4 /* AppDelegate.swift in Sources */,
 				1A6754A222395B4F005AA0E0 /* CNAPulseView.swift in Sources */,
+				1A6754A422396652005AA0E0 /* CNAButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
