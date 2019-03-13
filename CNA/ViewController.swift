@@ -92,14 +92,8 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
             }
         }
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
 
-        self.getwifi()
-        self.startPinging()
-        self.monitorNWPath()
-
+    private func setupURLSession() -> URLSession {
         let urlRequestQueue = OperationQueue()
         urlRequestQueue.name = "urlRequests"
         urlRequestQueue.qualityOfService = .userInteractive
@@ -109,11 +103,13 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
         configuration.allowsCellularAccess = false
         configuration.waitsForConnectivity = false
         configuration.tlsMinimumSupportedProtocol = .sslProtocolAll
-        let session = URLSession(configuration: configuration,
-                                 delegate: self,
-                                 delegateQueue: urlRequestQueue)
+        return URLSession(configuration: configuration,
+                          delegate: self,
+                          delegateQueue: urlRequestQueue)
+    }
 
-        guard let url = URL(string: "https://192.168.1.1/") else {
+    private func testURLaccess(urlString: String, session: URLSession) {
+        guard let url = URL(string: urlString) else {
             print("Couldn't make this URL")
             return
         }
@@ -137,6 +133,20 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
             }
         }
         dataTask?.resume()
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+
+        self.getwifi()
+        self.startPinging()
+        self.monitorNWPath()
+        let session = setupURLSession()
+        testURLaccess(urlString: "https://www.google.com", session: session)
+        testURLaccess(urlString: "https://pandora.com", session: session)
+        testURLaccess(urlString: "https://squareup.com/", session: session)
+        testURLaccess(urlString: "https://facebook.com/", session: session)
     }
 
     // URLSessionTaskDelegate methods
