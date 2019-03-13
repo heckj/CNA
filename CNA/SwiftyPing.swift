@@ -3,8 +3,8 @@
 //  SwiftyPing
 //
 //  Created by Sami Yrjänheikki on 6.8.2018.
-// swiftlint:disable:next file_header
 //  Copyright © 2018 Sami Yrjänheikki. All rights reserved.
+//  Copyright © 2019 Joseph Heck. All rights reserved.
 //
 // MIT Licensed, per https://github.com/heckj/SwiftyPing <- https://github.com/imas145/SwiftyPing
 

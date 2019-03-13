@@ -3,6 +3,7 @@
 //  Coffeeshop Network Advisor
 //
 //  Created by Joseph Heck on 3/9/19.
+//  Copyright © 2019 Joseph Heck. All rights reserved.
 //
 
 import Charts
