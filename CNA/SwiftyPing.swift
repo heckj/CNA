@@ -211,6 +211,8 @@ public class SwiftyPing: NSObject {
         }
     }
 
+    // process the raw socket callback data, sorting out the data fields and extracting
+    // the details.
     func socket(socket: CFSocket, didReadData data: Data?) {
         var ipHeaderData: NSData?
         var ipData: NSData?
