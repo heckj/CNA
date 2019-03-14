@@ -40,10 +40,14 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
         }
 
         // test each of the URLs for access
+        for urlString in urlsToValidate {
+            self.urlLabels[urlString]?.textColor = UIColor.lightGray
+        }
         for (urlString) in self.urlsToValidate {
             self.testURLaccess(urlString: urlString)
         }
     }
+
     // DIAGNOSTIC ENVIRONMENT VARIABLE: CFNETWORK_DIAGNOSTICS
     // set to 0, 1, 2, or 3 - increasing for more diagnostic information from CFNetwork
 
@@ -179,6 +183,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
                 print("resulting status code is ", response.statusCode)
                 DispatchQueue.main.async { [weak self] in
                     UIView.animate(withDuration: 1, animations: {
+                        // NOTE(heckj): this doesn't seem to "fade into green", which is what I hoped...
                         // https://www.ralfebert.de/ios-examples/uikit/swift-uicolor-picker/
                         // dark green
                         self?.urlLabels[urlString]?.textColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
