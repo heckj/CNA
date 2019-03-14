@@ -40,7 +40,7 @@
                                 </constraints>
                             </view>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diagnostic:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aex-r1-92E">
-                                <rect key="frame" x="16" y="160" width="343" height="28"/>
+                                <rect key="frame" x="16" y="160" width="120.5" height="28"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                 </accessibility>
@@ -54,12 +54,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="1D5-Xd-fVe">
-                                <rect key="frame" x="16" y="400" width="343" height="120"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="Zvw-t8-98R"/>
-                                </constraints>
-                            </stackView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="300" verticalHuggingPriority="300" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XKP-V7-k8e">
                                 <rect key="frame" x="16" y="189" width="343" height="200"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -71,15 +65,34 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                             </textView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="1D5-Xd-fVe">
+                                <rect key="frame" x="16" y="400" width="343" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="Zvw-t8-98R"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PQ8-qu-y9x">
+                                <rect key="frame" x="53.5" y="156" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Rrd-st-1LC"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="VKy-vT-Wh9"/>
+                                </constraints>
+                                <state key="normal" title="check!"/>
+                                <connections>
+                                    <action selector="doTheStuff:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wUw-dG-WPb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Aex-r1-92E" secondAttribute="trailing" constant="16" id="Anu-L2-cRn"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Aex-r1-92E" secondAttribute="trailing" constant="16" id="Anu-L2-cRn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="2fJ-is-mzM" secondAttribute="bottom" constant="20" id="GfH-64-i5X"/>
+                            <constraint firstItem="PQ8-qu-y9x" firstAttribute="centerX" secondItem="Aex-r1-92E" secondAttribute="centerX" id="ORn-EJ-ekB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kQp-FQ-i2D" secondAttribute="trailing" constant="16" id="R4V-4R-R6O"/>
                             <constraint firstItem="1D5-Xd-fVe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="W3S-vm-Vcz"/>
                             <constraint firstItem="2fJ-is-mzM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="XUg-QM-K4r"/>
                             <constraint firstItem="1D5-Xd-fVe" firstAttribute="firstBaseline" secondItem="XKP-V7-k8e" secondAttribute="baseline" constant="11" symbolType="layoutAnchor" id="XdT-H5-1RT"/>
+                            <constraint firstItem="PQ8-qu-y9x" firstAttribute="top" secondItem="kQp-FQ-i2D" secondAttribute="bottom" constant="8" id="ZKg-Q2-Tgh"/>
                             <constraint firstItem="Aex-r1-92E" firstAttribute="leading" secondItem="XKP-V7-k8e" secondAttribute="leading" id="aXA-hQ-2Y7"/>
                             <constraint firstItem="kQp-FQ-i2D" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="bQ2-Ag-oST"/>
                             <constraint firstItem="XKP-V7-k8e" firstAttribute="top" secondItem="Aex-r1-92E" secondAttribute="bottom" constant="1" id="fpW-0I-KTc"/>
@@ -101,6 +114,7 @@
                         <outlet property="overallAccessLabel" destination="Efh-Fr-fHl" id="Gf6-3Q-GnX"/>
                         <outlet property="overallAccessView" destination="kQp-FQ-i2D" id="tmK-jk-DiI"/>
                         <outlet property="stackView" destination="1D5-Xd-fVe" id="P6Q-dN-NxP"/>
+                        <outlet property="testButton" destination="PQ8-qu-y9x" id="NPX-i7-Fv1"/>
                         <outlet property="textView" destination="2fJ-is-mzM" id="z6N-Vu-3cV"/>
                     </connections>
                 </viewController>

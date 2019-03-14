@@ -23,6 +23,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
     ]
     private var urlLabels: [String: UILabel] = [:]
     private var session: URLSession?
+    private var monitor: NWPathMonitor?
 
     @IBOutlet weak private var stackView: UIStackView!
     @IBOutlet weak private var overallAccessView: UIView!
@@ -30,7 +31,19 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
     @IBOutlet weak private var overallAccessLabel: UILabel!
     @IBOutlet weak private var diagnosticText: UITextView!
     @IBOutlet weak private var textView: UITextView!
+    @IBOutlet weak private var testButton: UIButton!
 
+    // TEST BUTTON to force the URL checking
+    @IBAction private func doTheStuff(_ sender: UIButton) {
+        if let monitor = self.monitor {
+            print("monitor path: ", monitor.currentPath.status)
+        }
+
+        // test each of the URLs for access
+        for (urlString) in self.urlsToValidate {
+            self.testURLaccess(urlString: urlString)
+        }
+    }
     // DIAGNOSTIC ENVIRONMENT VARIABLE: CFNETWORK_DIAGNOSTICS
     // set to 0, 1, 2, or 3 - increasing for more diagnostic information from CFNetwork
 
@@ -86,10 +99,11 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
     }
 
     private func monitorNWPath() {
-        let monitor = NWPathMonitor(requiredInterfaceType: .wifi)
         let queue = DispatchQueue(label: "netmonitor")
-        monitor.start(queue: queue)
-        monitor.pathUpdateHandler = { path in
+        self.monitor = NWPathMonitor(requiredInterfaceType: .wifi)
+        monitor?.start(queue: queue)
+        monitor?.pathUpdateHandler = { path in
+            print("path status is ", path.status)
             if path.status == .satisfied {
                 print(path.debugDescription, "is expensive? ", path.isExpensive, "is connected")
                 DispatchQueue.main.async { [weak self] in
