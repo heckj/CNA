@@ -13,6 +13,15 @@ import UIKit
 
 class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelegate {
     var dataTask: URLSessionDataTask?
+    // URLs to check and validate
+    var urlValidations: [String: String] = [
+        "https://www.google.com/": "unknown",
+        "https://pandora.com/": "unknown",
+        "https://squareup.com/": "unknown",
+        "https://facebook.com/": "unknown"
+    ]
+
+    @IBOutlet weak private var stackView: UIStackView!
     @IBOutlet weak private var overallAccessView: UIView!
     @IBOutlet weak private var overallAccessLabel: UILabel!
     @IBOutlet weak private var diagnosticText: UITextView!
@@ -123,6 +132,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
             guard error == nil else {
                 print("Error calling the URL")
                 print(error!)
+                self.urlValidations[urlString] = "error"
                 return
             }
             // make sure we gots the data
@@ -130,6 +140,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
                 let response = response as? HTTPURLResponse {
                 print("resulting status code is ", response.statusCode)
                 print("data returned is ", data)
+                self.urlValidations[urlString] = "ok"
             }
         }
         dataTask?.resume()
@@ -138,15 +149,29 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
+        self.urlValidations = [
+            "https://www.google.com/": "unknown",
+            "https://pandora.com/": "unknown",
+            "https://squareup.com/": "unknown",
+            "https://facebook.com/": "unknown"
+        ]
+        for (urlString, _) in self.urlValidations {
+            let viewForURL = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
+            viewForURL.text = urlString
+            viewForURL.textColor = UIColor.gray
+            viewForURL.textAlignment = NSTextAlignment.center
+            stackView.addArrangedSubview(viewForURL)
+            stackView.alignment = .center
+        }
         self.getwifi()
         self.startPinging()
         self.monitorNWPath()
         let session = setupURLSession()
-        testURLaccess(urlString: "https://www.google.com/", session: session)
-        testURLaccess(urlString: "https://pandora.com/", session: session)
-        testURLaccess(urlString: "https://squareup.com/", session: session)
-        testURLaccess(urlString: "https://facebook.com/", session: session)
+
+        // test each of the URLs for access
+        for (urlString, _) in self.urlValidations {
+            testURLaccess(urlString: urlString, session: session)
+        }
     }
 
     // URLSessionTaskDelegate methods
