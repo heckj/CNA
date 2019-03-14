@@ -161,7 +161,6 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
             viewForURL.textColor = UIColor.gray
             viewForURL.textAlignment = NSTextAlignment.center
             stackView.addArrangedSubview(viewForURL)
-            stackView.alignment = .center
         }
         self.getwifi()
         self.startPinging()

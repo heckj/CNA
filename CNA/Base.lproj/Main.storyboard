@@ -6,6 +6,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -48,25 +49,22 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="WIFI ACCESS PING:" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2fJ-is-mzM">
-                                <rect key="frame" x="16" y="497" width="343" height="150"/>
+                                <rect key="frame" x="16" y="528" width="343" height="119"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="4AW-Z2-1qG"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1D5-Xd-fVe">
-                                <rect key="frame" x="16" y="388" width="343" height="120"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="1D5-Xd-fVe">
+                                <rect key="frame" x="16" y="400" width="343" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="Zvw-t8-98R"/>
                                 </constraints>
                             </stackView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="300" verticalHuggingPriority="300" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XKP-V7-k8e">
-                                <rect key="frame" x="16" y="189" width="343" height="188"/>
+                                <rect key="frame" x="16" y="189" width="343" height="200"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="Jy5-DG-3GH"/>
+                                    <constraint firstAttribute="height" constant="200" id="Jy5-DG-3GH"/>
                                 </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -88,9 +86,9 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XKP-V7-k8e" secondAttribute="trailing" constant="16" id="l6q-El-p47"/>
                             <constraint firstItem="Aex-r1-92E" firstAttribute="top" secondItem="kQp-FQ-i2D" secondAttribute="bottom" constant="12" id="lAk-j7-47E"/>
                             <constraint firstItem="kQp-FQ-i2D" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mBf-iV-Sqo"/>
-                            <constraint firstItem="1D5-Xd-fVe" firstAttribute="baseline" secondItem="2fJ-is-mzM" secondAttribute="firstBaseline" constant="11" symbolType="layoutAnchor" id="nBK-jU-OfE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1D5-Xd-fVe" secondAttribute="trailing" constant="16" id="qBI-vh-gb8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2fJ-is-mzM" secondAttribute="trailing" constant="16" id="qBZ-HC-UH6"/>
+                            <constraint firstItem="2fJ-is-mzM" firstAttribute="top" secondItem="1D5-Xd-fVe" secondAttribute="bottom" constant="8" symbolic="YES" id="rOn-DZ-2Aq"/>
                             <constraint firstItem="XKP-V7-k8e" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="w0G-L6-fa2"/>
                             <constraint firstItem="kQp-FQ-i2D" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="x9g-ob-EgR"/>
                         </constraints>
