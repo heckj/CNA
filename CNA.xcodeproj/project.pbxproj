@@ -16,7 +16,6 @@
 		1A5AC81B223469E800D388F4 /* CoffeeshopNetworkAdvisorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AC81A223469E800D388F4 /* CoffeeshopNetworkAdvisorUITests.swift */; };
 		1A5AC82B22346E3700D388F4 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5AC82A22346E3700D388F4 /* NetworkExtension.framework */; };
 		1A65D717223470F600A6E9BE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A65D716223470F600A6E9BE /* Default-568h@2x.png */; };
-		1A67549F22395A85005AA0E0 /* PulseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A67549E22395A85005AA0E0 /* PulseView.xib */; };
 		1A6754A222395B4F005AA0E0 /* CNAPulseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6754A122395B4F005AA0E0 /* CNAPulseView.swift */; };
 		1A6754A422396652005AA0E0 /* CNAButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6754A322396652005AA0E0 /* CNAButton.swift */; };
 		1ACB9BD022385281009DE3BE /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A149AEB22384AD300E5168B /* Charts.framework */; };
@@ -95,7 +94,6 @@
 		1A5AC82A22346E3700D388F4 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		1A65D716223470F600A6E9BE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		1A65D7182234713500A6E9BE /* CNA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CNA.entitlements; sourceTree = "<group>"; };
-		1A67549E22395A85005AA0E0 /* PulseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PulseView.xib; sourceTree = "<group>"; };
 		1A6754A122395B4F005AA0E0 /* CNAPulseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNAPulseView.swift; sourceTree = "<group>"; };
 		1A6754A322396652005AA0E0 /* CNAButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNAButton.swift; sourceTree = "<group>"; };
 		1AF88252223830DC00D49A66 /* SwiftyPing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyPing.swift; sourceTree = "<group>"; };
@@ -173,7 +171,6 @@
 				1A65D716223470F600A6E9BE /* Default-568h@2x.png */,
 				1A5AC803223469E800D388F4 /* LaunchScreen.storyboard */,
 				1A5AC806223469E800D388F4 /* Info.plist */,
-				1A67549E22395A85005AA0E0 /* PulseView.xib */,
 				1A6754A122395B4F005AA0E0 /* CNAPulseView.swift */,
 				1A6754A322396652005AA0E0 /* CNAButton.swift */,
 			);
@@ -347,7 +344,6 @@
 			files = (
 				1A5AC805223469E800D388F4 /* LaunchScreen.storyboard in Resources */,
 				1A65D717223470F600A6E9BE /* Default-568h@2x.png in Resources */,
-				1A67549F22395A85005AA0E0 /* PulseView.xib in Resources */,
 				1A5AC802223469E800D388F4 /* Assets.xcassets in Resources */,
 				1A5AC800223469E700D388F4 /* Main.storyboard in Resources */,
 			);

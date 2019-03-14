@@ -143,8 +143,8 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
         self.startPinging()
         self.monitorNWPath()
         let session = setupURLSession()
-        testURLaccess(urlString: "https://www.google.com", session: session)
-        testURLaccess(urlString: "https://pandora.com", session: session)
+        testURLaccess(urlString: "https://www.google.com/", session: session)
+        testURLaccess(urlString: "https://pandora.com/", session: session)
         testURLaccess(urlString: "https://squareup.com/", session: session)
         testURLaccess(urlString: "https://facebook.com/", session: session)
     }
