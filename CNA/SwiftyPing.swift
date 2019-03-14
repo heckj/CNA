@@ -11,7 +11,7 @@
 import Darwin
 import Foundation
 
-public typealias Observer = (( _ ping: SwiftyPing, _ response: PingResponse) -> Void)
+public typealias PingResponseClosure = (( _ ping: SwiftyPing, _ response: PingResponse) -> Void)
 public typealias ErrorClosure = ((_ ping: SwiftyPing, _ error: NSError) -> Void)
 
 // MARK: SwiftyPing
@@ -22,9 +22,8 @@ public class SwiftyPing: NSObject {
     var ip: String
     var configuration: PingConfiguration
 
-    public var observer: Observer?
-
-    var errorClosure: ErrorClosure?
+    public var responseClosure: PingResponseClosure?
+    public var errorClosure: ErrorClosure?
 
     var identifier: UInt32
 
@@ -198,6 +197,12 @@ public class SwiftyPing: NSObject {
 
     func scheduleNextPing() {
         serial.sync {
+            // stop attempts to schedule another ping if the sequenceCount has gone above the limit
+            if self.configuration.pingCountLimit > 0 &&
+                self.currentSequenceNumber > self.configuration.pingCountLimit {
+                return
+            }
+
             if self.hasScheduledNextPing {
                 return
             }
@@ -249,7 +254,7 @@ public class SwiftyPing: NSObject {
                                     sequenceNumber: Int64(currentSequenceNumber),
                                     duration: Date().timeIntervalSince(currentStartDate),
                                     error: error)
-        observer?(self, response)
+        responseClosure?(self, response)
 
         return scheduleNextPing()
     }
@@ -284,7 +289,7 @@ public class SwiftyPing: NSObject {
                                         sequenceNumber: Int64(currentSequenceNumber),
                                         duration: Date().timeIntervalSince(currentStartDate!),
                                         error: error)
-            observer?(self, response)
+            responseClosure?(self, response)
 
             return self.scheduleNextPing()
         case .timeout:
@@ -296,7 +301,7 @@ public class SwiftyPing: NSObject {
                                         sequenceNumber: Int64(currentSequenceNumber),
                                         duration: Date().timeIntervalSince(currentStartDate!),
                                         error: error)
-            observer?(self, response)
+            responseClosure?(self, response)
 
             return self.scheduleNextPing()
         default: break
@@ -315,7 +320,7 @@ public class SwiftyPing: NSObject {
                                         sequenceNumber: Int64(self.currentSequenceNumber),
                                         duration: Date().timeIntervalSince(self.currentStartDate!),
                                         error: error)
-            self.observer?(self, response)
+            self.responseClosure?(self, response)
             self.scheduleNextPing()
         }
     }
@@ -346,17 +351,22 @@ public struct PingConfiguration {
     let pingInterval: TimeInterval
     let timeoutInterval: TimeInterval
     let payloadSize: UInt64
+    let pingCountLimit: UInt64
 
-    public init(interval: TimeInterval = 1, with timeout: TimeInterval = 5, and payload: UInt64 = 64) {
+    public init(interval: TimeInterval = 1, timeout: TimeInterval = 5, payload: UInt64 = 64, limit: UInt64 = 0) {
         pingInterval = interval
         timeoutInterval = timeout
         payloadSize = payload
+        pingCountLimit = limit
     }
     public init(interval: TimeInterval) {
-        self.init(interval: interval, with: 5)
+        self.init(interval: interval, timeout: 5)
+    }
+    public init(interval: TimeInterval, count: UInt64) {
+        self.init(interval: interval, timeout: 5, payload: 64, limit: count)
     }
     public init(interval: TimeInterval, with timeout: TimeInterval) {
-        self.init(interval: interval, with: timeout, and: 64)
+        self.init(interval: interval, timeout: timeout, payload: 64)
     }
 }
 

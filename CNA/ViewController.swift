@@ -18,8 +18,8 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
         "https://www.google.com/",
         "https://www.pandora.com/",
         "https://squareup.com/",
-        "https://www.eldiablocoffee.com",
-        "https://www.facebook.com"
+        "https://www.eldiablocoffee.com/",
+        "https://www.facebook.com/"
     ]
     private var urlLabels: [String: UILabel] = [:]
     private var session: URLSession?
@@ -46,6 +46,10 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
         for (urlString) in self.urlsToValidate {
             self.testURLaccess(urlString: urlString)
         }
+        self.startPinging()
+        UIView.animate(withDuration: 1, animations: {
+            self.textView.isHidden = false
+        })
     }
 
     // DIAGNOSTIC ENVIRONMENT VARIABLE: CFNETWORK_DIAGNOSTICS
@@ -55,10 +59,17 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
         let ping = SwiftyPing(host: "192.168.1.1",
                               configuration: PingConfiguration(interval: 1),
                               queue: DispatchQueue.global())
-        ping?.observer = { ping, response in
+        ping?.responseClosure = { ping, response in
             DispatchQueue.main.async {
                 self.textView.text.append(
                     contentsOf: "\nPing #\(response.sequenceNumber): \(response.duration * 1000) ms")
+                self.textView.scrollRangeToVisible(NSRange(location: self.textView.text.count - 1, length: 1))
+            }
+        }
+        ping?.errorClosure = { ping, error in
+            DispatchQueue.main.async {
+                self.textView.text.append(
+                    contentsOf: "\nError #\(error.localizedDescription)")
                 self.textView.scrollRangeToVisible(NSRange(location: self.textView.text.count - 1, length: 1))
             }
         }
@@ -208,23 +219,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
         }
         self.getwifi()
 
-        // self.startPinging()
-        // doing the "ping" opens a raw socket listener that can (and does) capture information from the
-        // URL requests, so it can disrupt that setup with the URLSession stuff QUITE significantly
-        // causing an apparent error:
-
-        /*
-         Error Domain=NSURLErrorDomain Code=-1001 "The request timed out."
-         UserInfo={
-             NSErrorFailingURLStringKey=https://www.eldiablocoffee.com/,
-             NSErrorFailingURLKey=https://www.eldiablocoffee.com/,
-             _kCFStreamErrorDomainKey=4,
-             _kCFStreamErrorCodeKey=-2103,
-             NSLocalizedDescription=The request timed out.
-         }
-         2019-03-14 11:17:02.248552-0700 CNA[53893:2905714] Task
-         <66B27504-3D33-45A5-8971-719ECD7BF735>.<4> finished with error - code: -999
-        */
+        self.startPinging()
 
         self.monitorNWPath()
         // monitorPath cascades to validating the URLs IFF the path returns positively
