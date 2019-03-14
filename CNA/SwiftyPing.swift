@@ -383,10 +383,67 @@ struct ICMPHeader {
 }
 
 // ICMP type and code combinations:
+// reference:
+// https://www.ibm.com/support/knowledgecenter/en/SS42VS_7.3.1/com.ibm.qradar.doc/c_DefAppCfg_guide_ICMP_intro.html
 
 enum ICMPType: UInt8 {
-    case echoReply = 0           // code is always 0
-    case echoRequest = 8         // code is always 8
+    case echoReply = 0
+    case echoRequest = 8
+    case destinationUnreachable = 3
+    case sourceQuench = 4
+    case redirect = 5
+    case routerAdvertisement = 9
+    case routerSelection = 10
+    case timeExceeded = 11
+    case parameterProblem = 12
+    case timestamp = 13
+    case timestampReply = 14
+    case informationRequest = 15
+    case informationReply = 16
+    case addressMaskRequest = 17
+    case addressMaskReply = 18
+    case traceRoute = 30
+}
+
+// subtype from ICMPType 3: destinationUnreachable
+enum ICMPDestinationUnreachable: UInt8 {
+    case netUnreachable = 0
+    case hostUnreachable = 1
+    case protocolUnreachable = 2
+    case portUnreachable = 3
+    case fragmentationNeeded = 4
+    case sourceRouteFailed = 5
+    case destinationNetworkUnknown = 6
+    case destinationHostUnknown = 7
+    case sourceHostIsolated = 8
+    case communicationToNetworkAdminProhibited = 9
+    case communicationToHostAdminProhibited = 10
+    // swiftlint:disable:next identifier_name
+    case destinationNetworkUnreachableForTypeOfService = 11
+    // swiftlint:disable:next identifier_name
+    case destinationHostUnreachableForTypeOfService = 12
+    case communicationAdminProhibited = 13
+    case hostPrecedenceViolation = 14
+    case precedenceCuttoffInEffect = 15
+}
+// subtype from ICMPType 5: redirect
+enum ICMPRedirect: UInt8 {
+    case redirectDatagramForNetwork = 0
+    case redirectDatagramForHost = 1
+    // swiftlint:disable:next identifier_name
+    case redirectDatagramForTypeOfServiceAndNetwork = 2
+    case redirectDatagramForTypeOfServiceAndHost = 3
+}
+// subtype from ICMPType 11: timeExceeded
+enum ICMPTimeExceeded: UInt8 {
+    case timeToLiveExceededInTransit = 0
+    case fragmentReassemblyTimeExceeded = 1
+}
+// subtype from ICMPType 12: parameterProblem
+enum ICMPParameterProblem: UInt8 {
+    case pointerIndicatesError = 0
+    case missingRequiredOption = 1
+    case badLength = 2
 }
 
 // static inline uint16_t in_cksum(const void *buffer, size_t bufferLen)
