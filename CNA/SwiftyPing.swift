@@ -347,26 +347,42 @@ public class PingResponse: NSObject {
         error = err
     }
 }
+
 public struct PingConfiguration {
     let pingInterval: TimeInterval
     let timeoutInterval: TimeInterval
     let payloadSize: UInt64
     let pingCountLimit: UInt64
 
-    public init(interval: TimeInterval = 1, timeout: TimeInterval = 5, payload: UInt64 = 64, limit: UInt64 = 0) {
+    public static let pingInterval: TimeInterval = 1
+    public static let pingTimeout: TimeInterval = 2
+    public static let pingDataSize: UInt64 = 64
+    public static let pingLimit: UInt64 = 0
+
+    public init(interval: TimeInterval = pingInterval,
+                timeout: TimeInterval = pingTimeout,
+                payload: UInt64 = pingDataSize,
+                limit: UInt64 = pingLimit) {
         pingInterval = interval
         timeoutInterval = timeout
         payloadSize = payload
         pingCountLimit = limit
     }
     public init(interval: TimeInterval) {
-        self.init(interval: interval, timeout: 5)
+        self.init(interval: interval,
+                  timeout: PingConfiguration.pingTimeout)
     }
     public init(interval: TimeInterval, count: UInt64) {
-        self.init(interval: interval, timeout: 5, payload: 64, limit: count)
+        self.init(interval: interval,
+                  timeout: PingConfiguration.pingTimeout,
+                  payload: PingConfiguration.pingDataSize,
+                  limit: count)
     }
     public init(interval: TimeInterval, with timeout: TimeInterval) {
-        self.init(interval: interval, timeout: timeout, payload: 64)
+        self.init(interval: interval,
+                  timeout: timeout,
+                  payload: PingConfiguration.pingDataSize,
+                  limit: PingConfiguration.pingLimit)
     }
 }
 

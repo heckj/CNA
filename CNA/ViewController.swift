@@ -57,7 +57,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
 
     private func startPinging() {
         let ping = SwiftyPing(host: "192.168.1.1",
-                              configuration: PingConfiguration(interval: 1),
+                              configuration: PingConfiguration(interval: 1, count: 3),
                               queue: DispatchQueue.global())
         ping?.responseClosure = { ping, response in
             DispatchQueue.main.async {
