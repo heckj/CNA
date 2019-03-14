@@ -39,7 +39,7 @@
                                     <constraint firstItem="Efh-Fr-fHl" firstAttribute="centerY" secondItem="kQp-FQ-i2D" secondAttribute="centerY" id="lbV-AC-rdZ"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diagnostic:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aex-r1-92E">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diagnostic:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aex-r1-92E">
                                 <rect key="frame" x="16" y="160" width="343" height="28"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
@@ -48,7 +48,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="WIFI ACCESS PING:" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2fJ-is-mzM">
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="WIFI ACCESS PING:" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2fJ-is-mzM">
                                 <rect key="frame" x="16" y="528" width="343" height="119"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -60,7 +60,7 @@
                                     <constraint firstAttribute="height" constant="120" id="Zvw-t8-98R"/>
                                 </constraints>
                             </stackView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="300" verticalHuggingPriority="300" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XKP-V7-k8e">
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="300" verticalHuggingPriority="300" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XKP-V7-k8e">
                                 <rect key="frame" x="16" y="189" width="343" height="200"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -96,6 +96,7 @@
                     </view>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
+                        <outlet property="diagnosticLabel" destination="Aex-r1-92E" id="evG-vo-lcE"/>
                         <outlet property="diagnosticText" destination="XKP-V7-k8e" id="l7q-xc-UKh"/>
                         <outlet property="overallAccessLabel" destination="Efh-Fr-fHl" id="Gf6-3Q-GnX"/>
                         <outlet property="overallAccessView" destination="kQp-FQ-i2D" id="tmK-jk-DiI"/>

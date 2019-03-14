@@ -12,17 +12,21 @@ import SystemConfiguration.CaptiveNetwork
 import UIKit
 
 class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelegate {
-    var dataTask: URLSessionDataTask?
+    private var dataTask: URLSessionDataTask?
     // URLs to check and validate
-    var urlValidations: [String: String] = [
-        "https://www.google.com/": "unknown",
-        "https://pandora.com/": "unknown",
-        "https://squareup.com/": "unknown",
-        "https://facebook.com/": "unknown"
+    private var urlsToValidate: [String] = [
+        "https://www.google.com/",
+        "https://www.pandora.com/",
+        "https://squareup.com/",
+        "https://www.eldiablocoffee.com",
+        "https://www.facebook.com"
     ]
+    private var urlLabels: [String: UILabel] = [:]
+    private var session: URLSession?
 
     @IBOutlet weak private var stackView: UIStackView!
     @IBOutlet weak private var overallAccessView: UIView!
+    @IBOutlet weak private var diagnosticLabel: UILabel!
     @IBOutlet weak private var overallAccessLabel: UILabel!
     @IBOutlet weak private var diagnosticText: UITextView!
     @IBOutlet weak private var textView: UITextView!
@@ -89,14 +93,26 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
             if path.status == .satisfied {
                 print(path.debugDescription, "is expensive? ", path.isExpensive, "is connected")
                 DispatchQueue.main.async { [weak self] in
-                    self?.overallAccessView.backgroundColor = UIColor.green
                     self?.overallAccessLabel.text = "Internet available"
+                    UIView.animate(withDuration: 1, animations: {
+                        self?.overallAccessView.backgroundColor = #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
+                        self?.diagnosticText.isHidden = true
+                        self?.diagnosticLabel.isHidden = true
+                    })
+                }
+                // test each of the URLs for access
+                for (urlString) in self.urlsToValidate {
+                    self.testURLaccess(urlString: urlString)
                 }
             } else {
                 print(path.debugDescription, "is expensive? ", path.isExpensive, "is disconnected")
                 DispatchQueue.main.async { [weak self] in
-                    self?.overallAccessView.backgroundColor = UIColor.red
                     self?.overallAccessLabel.text = "No Internet access"
+                    UIView.animate(withDuration: 1, animations: {
+                        self?.overallAccessView.backgroundColor = UIColor.red
+                        self?.diagnosticText.isHidden = false
+                        self?.diagnosticLabel.isHidden = false
+                    })
                 }
             }
         }
@@ -108,7 +124,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
         urlRequestQueue.qualityOfService = .userInteractive
 
         let configuration = URLSessionConfiguration.ephemeral
-        configuration.timeoutIntervalForResource = 1
+        configuration.timeoutIntervalForResource = 3
         configuration.allowsCellularAccess = false
         configuration.waitsForConnectivity = false
         configuration.tlsMinimumSupportedProtocol = .sslProtocolAll
@@ -117,7 +133,11 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
                           delegateQueue: urlRequestQueue)
     }
 
-    private func testURLaccess(urlString: String, session: URLSession) {
+    private func testURLaccess(urlString: String) {
+        guard let session = self.session else {
+            print("Session has not been created for verifying URLs")
+            return
+        }
         guard let url = URL(string: urlString) else {
             print("Couldn't make this URL")
             return
@@ -132,15 +152,24 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
             guard error == nil else {
                 print("Error calling the URL")
                 print(error!)
-                self.urlValidations[urlString] = "error"
+                DispatchQueue.main.async { [weak self] in
+                    UIView.animate(withDuration: 1, animations: {
+                        self?.urlLabels[urlString]?.textColor = UIColor.red
+                    })
+                }
                 return
             }
             // make sure we gots the data
-            if let data = data,
+            if data != nil,
                 let response = response as? HTTPURLResponse {
                 print("resulting status code is ", response.statusCode)
-                print("data returned is ", data)
-                self.urlValidations[urlString] = "ok"
+                DispatchQueue.main.async { [weak self] in
+                    UIView.animate(withDuration: 1, animations: {
+                        // https://www.ralfebert.de/ios-examples/uikit/swift-uicolor-picker/
+                        // dark green
+                        self?.urlLabels[urlString]?.textColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+                    })
+                }
             }
         }
         dataTask?.resume()
@@ -148,29 +177,38 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.session = setupURLSession()
         // Do any additional setup after loading the view, typically from a nib.
-        self.urlValidations = [
-            "https://www.google.com/": "unknown",
-            "https://pandora.com/": "unknown",
-            "https://squareup.com/": "unknown",
-            "https://facebook.com/": "unknown"
-        ]
-        for (urlString, _) in self.urlValidations {
+        for (urlString) in self.urlsToValidate {
             let viewForURL = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
             viewForURL.text = urlString
             viewForURL.textColor = UIColor.gray
             viewForURL.textAlignment = NSTextAlignment.center
+            urlLabels[urlString] = viewForURL
             stackView.addArrangedSubview(viewForURL)
         }
         self.getwifi()
-        self.startPinging()
-        self.monitorNWPath()
-        let session = setupURLSession()
 
-        // test each of the URLs for access
-        for (urlString, _) in self.urlValidations {
-            testURLaccess(urlString: urlString, session: session)
-        }
+        // self.startPinging()
+        // doing the "ping" opens a raw socket listener that can (and does) capture information from the
+        // URL requests, so it can disrupt that setup with the URLSession stuff QUITE significantly
+        // causing an apparent error:
+
+        /*
+         Error Domain=NSURLErrorDomain Code=-1001 "The request timed out."
+         UserInfo={
+             NSErrorFailingURLStringKey=https://www.eldiablocoffee.com/,
+             NSErrorFailingURLKey=https://www.eldiablocoffee.com/,
+             _kCFStreamErrorDomainKey=4,
+             _kCFStreamErrorCodeKey=-2103,
+             NSLocalizedDescription=The request timed out.
+         }
+         2019-03-14 11:17:02.248552-0700 CNA[53893:2905714] Task
+         <66B27504-3D33-45A5-8971-719ECD7BF735>.<4> finished with error - code: -999
+        */
+
+        self.monitorNWPath()
+        // monitorPath cascades to validating the URLs IFF the path returns positively
     }
 
     // URLSessionTaskDelegate methods
