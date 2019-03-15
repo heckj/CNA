@@ -419,7 +419,7 @@
 		};
 		1A4D3220223C0B330097967A /* SocketTests.xctest */ = {
 			isa = PBXReferenceProxy;
-			fileType = file;
+			fileType = wrapper.cfbundle;
 			path = SocketTests.xctest;
 			remoteRef = 1A4D321F223C0B330097967A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
