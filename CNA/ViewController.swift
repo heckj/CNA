@@ -8,7 +8,6 @@
 
 import Charts
 import Network
-//import SwiftyPing
 import SystemConfiguration.CaptiveNetwork
 import UIKit
 
@@ -31,7 +30,6 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
     @IBOutlet weak private var diagnosticLabel: UILabel!
     @IBOutlet weak private var overallAccessLabel: UILabel!
     @IBOutlet weak private var diagnosticText: UITextView!
-    @IBOutlet weak private var textView: UITextView!
     @IBOutlet weak private var testButton: UIButton!
 
     // TEST BUTTON to force the URL checking
@@ -39,52 +37,11 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
         if let monitor = self.monitor {
             print("monitor path: ", monitor.currentPath.status)
         }
-
-        // test each of the URLs for access
-        for urlString in urlsToValidate {
-            self.urlLabels[urlString]?.textColor = UIColor.lightGray
-        }
-        for (urlString) in self.urlsToValidate {
-            self.testURLaccess(urlString: urlString)
-        }
-//        self.startPinging()
-//        UIView.animate(withDuration: 1, animations: {
-//            self.textView.isHidden = false
-//        })
-        let checker = ResponseChecker(host: "172.168.1.1")
-        checker.responseClosure = { _, result in
-            print("GOT A RESPONSE, AND IT WAS: ", result)
-        }
-        do {
-            try checker.checkSocketResponse()
-        } catch {
-            print("something bad happened with the socket check: ", error)
-        }
+        self.resetAndCheckURLS()
     }
 
     // DIAGNOSTIC ENVIRONMENT VARIABLE: CFNETWORK_DIAGNOSTICS
     // set to 0, 1, 2, or 3 - increasing for more diagnostic information from CFNetwork
-
-//    private func startPinging() {
-//        let ping = SwiftyPing(host: "192.168.1.1",
-//                              configuration: PingConfiguration(interval: 1, count: 3),
-//                              queue: DispatchQueue.global())
-//        ping?.responseClosure = { ping, response in
-//            DispatchQueue.main.async {
-//                self.textView.text.append(
-//                    contentsOf: "\nPing #\(response.sequenceNumber): \(response.duration * 1000) ms")
-//                self.textView.scrollRangeToVisible(NSRange(location: self.textView.text.count - 1, length: 1))
-//            }
-//        }
-//        ping?.errorClosure = { ping, error in
-//            DispatchQueue.main.async {
-//                self.textView.text.append(
-//                    contentsOf: "\nError #\(error.localizedDescription)")
-//                self.textView.scrollRangeToVisible(NSRange(location: self.textView.text.count - 1, length: 1))
-//            }
-//        }
-//        ping?.start()
-//    }
 
     private func getwifi() {
         // https://developer.apple.com/documentation/systemconfiguration/1614126-cncopycurrentnetworkinfo?language=objc
@@ -123,6 +80,18 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
         }
     }
 
+    private func resetAndCheckURLS() {
+        // test each of the URLs for access
+        for urlString in urlsToValidate {
+            DispatchQueue.main.async { [weak self] in
+                self?.urlLabels[urlString]?.textColor = UIColor.lightGray
+            }
+        }
+        for (urlString) in self.urlsToValidate {
+            self.testURLaccess(urlString: urlString)
+        }
+    }
+
     private func monitorNWPath() {
         let queue = DispatchQueue(label: "netmonitor")
         self.monitor = NWPathMonitor(requiredInterfaceType: .wifi)
@@ -139,10 +108,6 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
                         self?.diagnosticLabel.isHidden = true
                     })
                 }
-                // test each of the URLs for access
-                for (urlString) in self.urlsToValidate {
-                    self.testURLaccess(urlString: urlString)
-                }
             } else {
                 print(path.debugDescription, "is expensive? ", path.isExpensive, "is disconnected")
                 DispatchQueue.main.async { [weak self] in
@@ -154,6 +119,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
                     })
                 }
             }
+            self.resetAndCheckURLS()
         }
     }
 
@@ -228,11 +194,30 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
             stackView.addArrangedSubview(viewForURL)
         }
         self.getwifi()
-
-//        self.startPinging()
-
         self.monitorNWPath()
-        // monitorPath cascades to validating the URLs IFF the path returns positively
+        let checker = ResponseChecker(host: "192.168.1.1")
+        checker.responseClosure = { _, result in
+            // test each of the URLs for access
+
+            DispatchQueue.main.async { [weak self] in
+                self?.resetAndCheckURLS()
+                if result {
+                    self?.diagnosticText.text = "The WIFI is accessible locally, so any problems with the internet "
+                    self?.diagnosticText.text += "is 'upstream' and not local."
+                    self?.diagnosticText.text += "\n\n"
+                    self?.diagnosticText.text += "If the internet is unavailable, you should contact the service "
+                    self?.diagnosticText.text += "provider, as they don't appear to be providing a conection currently."
+                } else {
+                    self?.diagnosticText.text = "The WIFI is not accessible, so it's probably worth restarting the "
+                    self?.diagnosticText.text += "WIFI router."
+                }
+            }
+        }
+        do {
+            try checker.checkSocketResponse()
+        } catch {
+            print("something bad happened with the socket check: ", error)
+        }
     }
 
     // URLSessionTaskDelegate methods
