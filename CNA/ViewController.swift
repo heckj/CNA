@@ -51,6 +51,15 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
 //        UIView.animate(withDuration: 1, animations: {
 //            self.textView.isHidden = false
 //        })
+        let checker = ResponseChecker(host: "172.168.1.1")
+        checker.responseClosure = { _, result in
+            print("GOT A RESPONSE, AND IT WAS: ", result)
+        }
+        do {
+            try checker.checkSocketResponse()
+        } catch {
+            print("something bad happened with the socket check: ", error)
+        }
     }
 
     // DIAGNOSTIC ENVIRONMENT VARIABLE: CFNETWORK_DIAGNOSTICS
@@ -230,29 +239,29 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
     func urlSession(_ session: URLSession,
                     task: URLSessionTask,
                     didFinishCollecting metrics: URLSessionTaskMetrics) {
-        // check the metrics
-        print("task duration (ms): ", metrics.taskInterval.duration * 1000)
-        print("redirect count was: ", metrics.redirectCount)
-        print("details...")
-        let transactionMetricsList = metrics.transactionMetrics
-        for metric in transactionMetricsList {
-            print("request ", metric.request.debugDescription)
-            print("fetchStart ", metric.fetchStartDate!)
-            // some of the rest of this may not actually exist if the request fails... need to check nils...
-
-            if let domainStart = metric.domainLookupStartDate,
-                let domainEnd = metric.domainLookupEndDate,
-                let connectStart = metric.connectStartDate,
-                let connectEnd = metric.connectEndDate,
-                let requestStart = metric.connectStartDate,
-                let requestEnd = metric.connectEndDate,
-                let responseStart = metric.responseStartDate,
-                let responseEnd = metric.responseEndDate {
-                print("domainDuration (ms) ", domainEnd.timeIntervalSince(domainStart) * 1000)
-                print("connectDuration (ms) ", connectEnd.timeIntervalSince(connectStart) * 1000)
-                print("requestDuration (ms) ", requestEnd.timeIntervalSince(requestStart) * 1000)
-                print("responseDuration (ms) ", responseEnd.timeIntervalSince(responseStart) * 1000)
-            }
-        }
+//        // check the metrics
+//        print("task duration (ms): ", metrics.taskInterval.duration * 1000)
+//        print("redirect count was: ", metrics.redirectCount)
+//        print("details...")
+//        let transactionMetricsList = metrics.transactionMetrics
+//        for metric in transactionMetricsList {
+//            print("request ", metric.request.debugDescription)
+//            print("fetchStart ", metric.fetchStartDate!)
+//            // some of the rest of this may not actually exist if the request fails... need to check nils...
+//
+//            if let domainStart = metric.domainLookupStartDate,
+//                let domainEnd = metric.domainLookupEndDate,
+//                let connectStart = metric.connectStartDate,
+//                let connectEnd = metric.connectEndDate,
+//                let requestStart = metric.connectStartDate,
+//                let requestEnd = metric.connectEndDate,
+//                let responseStart = metric.responseStartDate,
+//                let responseEnd = metric.responseEndDate {
+//                print("domainDuration (ms) ", domainEnd.timeIntervalSince(domainStart) * 1000)
+//                print("connectDuration (ms) ", connectEnd.timeIntervalSince(connectStart) * 1000)
+//                print("requestDuration (ms) ", requestEnd.timeIntervalSince(requestStart) * 1000)
+//                print("responseDuration (ms) ", responseEnd.timeIntervalSince(responseStart) * 1000)
+//            }
+//        }
     }
 }
