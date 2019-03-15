@@ -8,6 +8,7 @@
 
 import Charts
 import Network
+import SwiftyPing
 import SystemConfiguration.CaptiveNetwork
 import UIKit
 
