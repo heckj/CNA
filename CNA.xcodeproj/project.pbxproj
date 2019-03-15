@@ -38,6 +38,20 @@
 			remoteGlobalIDString = 1CBBC58C6CE1EBEE9852CE41;
 			remoteInfo = ChartsTests;
 		};
+		1A4D321D223C0B330097967A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A4D3215223C0B320097967A /* Socket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "Socket::Socket::Product";
+			remoteInfo = Socket;
+		};
+		1A4D321F223C0B330097967A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A4D3215223C0B320097967A /* Socket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "Socket::SocketTests::Product";
+			remoteInfo = SocketTests;
+		};
 		1A5AC80C223469E800D388F4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A5AC7EF223469E700D388F4 /* Project object */;
@@ -59,6 +73,13 @@
 			remoteGlobalIDString = A58A4ED274A941CA248EA921;
 			remoteInfo = Charts;
 		};
+		1ACFF28B223C131E000921E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1ACFF281223C131E000921E6 /* SwiftyPing.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "SwiftyPing::SwiftyPing::Product";
+			remoteInfo = SwiftyPing;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -78,6 +99,7 @@
 /* Begin PBXFileReference section */
 		1A149AE522384AD300E5168B /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = dependencies/IOSCharts/Charts.xcodeproj; sourceTree = "<group>"; };
 		1A36F831223476120022F18F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; lineEnding = 0; path = README.md; sourceTree = "<group>"; };
+		1A4D3215223C0B320097967A /* Socket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Socket.xcodeproj; path = dependencies/BlueSocket/Socket.xcodeproj; sourceTree = "<group>"; };
 		1A5AC7F7223469E700D388F4 /* CNA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CNA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A5AC7FA223469E700D388F4 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A5AC7FC223469E700D388F4 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +118,7 @@
 		1A65D7182234713500A6E9BE /* CNA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CNA.entitlements; sourceTree = "<group>"; };
 		1A6754A122395B4F005AA0E0 /* CNAPulseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNAPulseView.swift; sourceTree = "<group>"; };
 		1A6754A322396652005AA0E0 /* CNAButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNAButton.swift; sourceTree = "<group>"; };
+		1ACFF281223C131E000921E6 /* SwiftyPing.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyPing.xcodeproj; path = dependencies/SwiftyPing/SwiftyPing.xcodeproj; sourceTree = "<group>"; };
 		1AF88252223830DC00D49A66 /* SwiftyPing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyPing.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -135,10 +158,21 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		1A4D3216223C0B320097967A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1A4D321E223C0B330097967A /* Socket.framework */,
+				1A4D3220223C0B330097967A /* SocketTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		1A5AC7EE223469E700D388F4 = {
 			isa = PBXGroup;
 			children = (
 				1A36F831223476120022F18F /* README.md */,
+				1ACFF281223C131E000921E6 /* SwiftyPing.xcodeproj */,
+				1A4D3215223C0B320097967A /* Socket.xcodeproj */,
 				1A149AE522384AD300E5168B /* Charts.xcodeproj */,
 				1A5AC7F9223469E700D388F4 /* CNA */,
 				1A5AC80E223469E800D388F4 /* CNATests */,
@@ -201,6 +235,14 @@
 				1A5AC82A22346E3700D388F4 /* NetworkExtension.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1ACFF282223C131E000921E6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1ACFF28C223C131E000921E6 /* SwiftyPing.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,6 +352,14 @@
 					ProductGroup = 1A149AE622384AD300E5168B /* Products */;
 					ProjectRef = 1A149AE522384AD300E5168B /* Charts.xcodeproj */;
 				},
+				{
+					ProductGroup = 1A4D3216223C0B320097967A /* Products */;
+					ProjectRef = 1A4D3215223C0B320097967A /* Socket.xcodeproj */;
+				},
+				{
+					ProductGroup = 1ACFF282223C131E000921E6 /* Products */;
+					ProjectRef = 1ACFF281223C131E000921E6 /* SwiftyPing.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -333,6 +383,27 @@
 			fileType = wrapper.cfbundle;
 			path = ChartsTests.xctest;
 			remoteRef = 1A149AEC22384AD300E5168B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1A4D321E223C0B330097967A /* Socket.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Socket.framework;
+			remoteRef = 1A4D321D223C0B330097967A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1A4D3220223C0B330097967A /* SocketTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = file;
+			path = SocketTests.xctest;
+			remoteRef = 1A4D321F223C0B330097967A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1ACFF28C223C131E000921E6 /* SwiftyPing.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftyPing.framework;
+			remoteRef = 1ACFF28B223C131E000921E6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
