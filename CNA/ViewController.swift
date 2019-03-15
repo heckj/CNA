@@ -8,7 +8,7 @@
 
 import Charts
 import Network
-import SwiftyPing
+//import SwiftyPing
 import SystemConfiguration.CaptiveNetwork
 import UIKit
 
@@ -47,35 +47,35 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
         for (urlString) in self.urlsToValidate {
             self.testURLaccess(urlString: urlString)
         }
-        self.startPinging()
-        UIView.animate(withDuration: 1, animations: {
-            self.textView.isHidden = false
-        })
+//        self.startPinging()
+//        UIView.animate(withDuration: 1, animations: {
+//            self.textView.isHidden = false
+//        })
     }
 
     // DIAGNOSTIC ENVIRONMENT VARIABLE: CFNETWORK_DIAGNOSTICS
     // set to 0, 1, 2, or 3 - increasing for more diagnostic information from CFNetwork
 
-    private func startPinging() {
-        let ping = SwiftyPing(host: "192.168.1.1",
-                              configuration: PingConfiguration(interval: 1, count: 3),
-                              queue: DispatchQueue.global())
-        ping?.responseClosure = { ping, response in
-            DispatchQueue.main.async {
-                self.textView.text.append(
-                    contentsOf: "\nPing #\(response.sequenceNumber): \(response.duration * 1000) ms")
-                self.textView.scrollRangeToVisible(NSRange(location: self.textView.text.count - 1, length: 1))
-            }
-        }
-        ping?.errorClosure = { ping, error in
-            DispatchQueue.main.async {
-                self.textView.text.append(
-                    contentsOf: "\nError #\(error.localizedDescription)")
-                self.textView.scrollRangeToVisible(NSRange(location: self.textView.text.count - 1, length: 1))
-            }
-        }
-        ping?.start()
-    }
+//    private func startPinging() {
+//        let ping = SwiftyPing(host: "192.168.1.1",
+//                              configuration: PingConfiguration(interval: 1, count: 3),
+//                              queue: DispatchQueue.global())
+//        ping?.responseClosure = { ping, response in
+//            DispatchQueue.main.async {
+//                self.textView.text.append(
+//                    contentsOf: "\nPing #\(response.sequenceNumber): \(response.duration * 1000) ms")
+//                self.textView.scrollRangeToVisible(NSRange(location: self.textView.text.count - 1, length: 1))
+//            }
+//        }
+//        ping?.errorClosure = { ping, error in
+//            DispatchQueue.main.async {
+//                self.textView.text.append(
+//                    contentsOf: "\nError #\(error.localizedDescription)")
+//                self.textView.scrollRangeToVisible(NSRange(location: self.textView.text.count - 1, length: 1))
+//            }
+//        }
+//        ping?.start()
+//    }
 
     private func getwifi() {
         // https://developer.apple.com/documentation/systemconfiguration/1614126-cncopycurrentnetworkinfo?language=objc
@@ -154,7 +154,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
         urlRequestQueue.qualityOfService = .userInteractive
 
         let configuration = URLSessionConfiguration.ephemeral
-        configuration.timeoutIntervalForResource = 3
+        configuration.timeoutIntervalForResource = 5
         configuration.allowsCellularAccess = false
         configuration.waitsForConnectivity = false
         configuration.tlsMinimumSupportedProtocol = .sslProtocolAll
@@ -220,7 +220,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
         }
         self.getwifi()
 
-        self.startPinging()
+//        self.startPinging()
 
         self.monitorNWPath()
         // monitorPath cascades to validating the URLs IFF the path returns positively
