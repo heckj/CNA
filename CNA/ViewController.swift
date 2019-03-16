@@ -25,6 +25,8 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
     private var session: URLSession?
     private var monitor: NWPathMonitor?
 
+    private let queue = DispatchQueue(label: "netmonitor")
+
     @IBOutlet weak private var stackView: UIStackView!
     @IBOutlet weak private var overallAccessView: UIView!
     @IBOutlet weak private var diagnosticLabel: UILabel!
@@ -93,34 +95,35 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
     }
 
     private func monitorNWPath() {
-        let queue = DispatchQueue(label: "netmonitor")
-        self.monitor = NWPathMonitor(requiredInterfaceType: .wifi)
-        monitor?.start(queue: queue)
-        monitor?.pathUpdateHandler = { path in
-            print("path status is ", path.status)
-            if path.status == .satisfied {
-                print(path.debugDescription, "is expensive? ", path.isExpensive, "is connected")
-                DispatchQueue.main.async { [weak self] in
-                    self?.overallAccessLabel.text = "Internet available"
-                    UIView.animate(withDuration: 1, animations: {
-                        self?.overallAccessView.backgroundColor = #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
-                        self?.diagnosticText.isHidden = true
-                        self?.diagnosticLabel.isHidden = true
-                    })
+        if self.monitor == nil {
+            self.monitor = NWPathMonitor(requiredInterfaceType: .wifi)
+            self.monitor?.pathUpdateHandler = { path in
+                print("path status is ", path.status)
+                if path.status == .satisfied {
+                    print(path.debugDescription, "is expensive? ", path.isExpensive, "is connected")
+                    DispatchQueue.main.async { [weak self] in
+                        self?.overallAccessLabel.text = "Internet available"
+                        UIView.animate(withDuration: 1, animations: {
+                            self?.overallAccessView.backgroundColor = #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
+                            self?.diagnosticText.isHidden = true
+                            self?.diagnosticLabel.isHidden = true
+                        })
+                    }
+                } else {
+                    print(path.debugDescription, "is expensive? ", path.isExpensive, "is disconnected")
+                    DispatchQueue.main.async { [weak self] in
+                        self?.overallAccessLabel.text = "No Internet access"
+                        UIView.animate(withDuration: 1, animations: {
+                            self?.overallAccessView.backgroundColor = UIColor.red
+                            self?.diagnosticText.isHidden = false
+                            self?.diagnosticLabel.isHidden = false
+                        })
+                    }
                 }
-            } else {
-                print(path.debugDescription, "is expensive? ", path.isExpensive, "is disconnected")
-                DispatchQueue.main.async { [weak self] in
-                    self?.overallAccessLabel.text = "No Internet access"
-                    UIView.animate(withDuration: 1, animations: {
-                        self?.overallAccessView.backgroundColor = UIColor.red
-                        self?.diagnosticText.isHidden = false
-                        self?.diagnosticLabel.isHidden = false
-                    })
-                }
+                self.resetAndCheckURLS()
             }
-            self.resetAndCheckURLS()
-        }
+            self.monitor?.start(queue: queue)
+        } // self.monitor == nil
     }
 
     private func setupURLSession() -> URLSession {

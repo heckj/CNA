@@ -11,11 +11,9 @@
 		1A5AC7FD223469E700D388F4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AC7FC223469E700D388F4 /* ViewController.swift */; };
 		1A5AC800223469E700D388F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A5AC7FE223469E700D388F4 /* Main.storyboard */; };
 		1A5AC802223469E800D388F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A5AC801223469E800D388F4 /* Assets.xcassets */; };
-		1A5AC805223469E800D388F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A5AC803223469E800D388F4 /* LaunchScreen.storyboard */; };
 		1A5AC810223469E800D388F4 /* CoffeeshopNetworkAdvisorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AC80F223469E800D388F4 /* CoffeeshopNetworkAdvisorTests.swift */; };
 		1A5AC81B223469E800D388F4 /* CoffeeshopNetworkAdvisorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AC81A223469E800D388F4 /* CoffeeshopNetworkAdvisorUITests.swift */; };
 		1A5AC82B22346E3700D388F4 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5AC82A22346E3700D388F4 /* NetworkExtension.framework */; };
-		1A65D717223470F600A6E9BE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A65D716223470F600A6E9BE /* Default-568h@2x.png */; };
 		1A6754A222395B4F005AA0E0 /* CNAPulseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6754A122395B4F005AA0E0 /* CNAPulseView.swift */; };
 		1A6754A422396652005AA0E0 /* CNAButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6754A322396652005AA0E0 /* CNAButton.swift */; };
 		1AA117D1223C19F400FA3901 /* ResponseChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA117D0223C19F400FA3901 /* ResponseChecker.swift */; };
@@ -126,7 +124,6 @@
 		1A5AC7FC223469E700D388F4 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ViewController.swift; sourceTree = "<group>"; };
 		1A5AC7FF223469E700D388F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1A5AC801223469E800D388F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1A5AC804223469E800D388F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A5AC806223469E800D388F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A5AC80B223469E800D388F4 /* CNATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CNATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A5AC80F223469E800D388F4 /* CoffeeshopNetworkAdvisorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeshopNetworkAdvisorTests.swift; sourceTree = "<group>"; };
@@ -135,7 +132,6 @@
 		1A5AC81A223469E800D388F4 /* CoffeeshopNetworkAdvisorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeshopNetworkAdvisorUITests.swift; sourceTree = "<group>"; };
 		1A5AC81C223469E800D388F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A5AC82A22346E3700D388F4 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
-		1A65D716223470F600A6E9BE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		1A65D7182234713500A6E9BE /* CNA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CNA.entitlements; sourceTree = "<group>"; };
 		1A6754A122395B4F005AA0E0 /* CNAPulseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNAPulseView.swift; sourceTree = "<group>"; };
 		1A6754A322396652005AA0E0 /* CNAButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNAButton.swift; sourceTree = "<group>"; };
@@ -224,8 +220,6 @@
 				1A5AC7FC223469E700D388F4 /* ViewController.swift */,
 				1A5AC7FE223469E700D388F4 /* Main.storyboard */,
 				1A5AC801223469E800D388F4 /* Assets.xcassets */,
-				1A65D716223470F600A6E9BE /* Default-568h@2x.png */,
-				1A5AC803223469E800D388F4 /* LaunchScreen.storyboard */,
 				1A5AC806223469E800D388F4 /* Info.plist */,
 				1A6754A122395B4F005AA0E0 /* CNAPulseView.swift */,
 				1A6754A322396652005AA0E0 /* CNAButton.swift */,
@@ -438,8 +432,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A5AC805223469E800D388F4 /* LaunchScreen.storyboard in Resources */,
-				1A65D717223470F600A6E9BE /* Default-568h@2x.png in Resources */,
 				1A5AC802223469E800D388F4 /* Assets.xcassets in Resources */,
 				1A5AC800223469E700D388F4 /* Main.storyboard in Resources */,
 			);
@@ -548,14 +540,6 @@
 				1A5AC7FF223469E700D388F4 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		1A5AC803223469E800D388F4 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1A5AC804223469E800D388F4 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
