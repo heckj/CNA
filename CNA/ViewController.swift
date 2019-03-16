@@ -12,8 +12,11 @@ import SystemConfiguration.CaptiveNetwork
 import UIKit
 
 class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelegate {
+    //TODO(heckj): move this setup to a model object accessible from the app-delegate
     private var dataTask: URLSessionDataTask?
     // URLs to check and validate
+
+    //TODO(heckj): move this setup to a model object accessible from the app-delegate
     private var urlsToValidate: [String] = [
         "https://www.google.com/",
         "https://www.pandora.com/",
@@ -22,9 +25,13 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
         "https://www.facebook.com/"
     ]
     private var urlLabels: [String: UILabel] = [:]
+
+    //TODO(heckj): move this setup to a model object accessible from the app-delegate
     private var session: URLSession?
+    //TODO(heckj): move this setup to a model object accessible from the app-delegate
     private var monitor: NWPathMonitor?
 
+    //TODO(heckj): move this setup to a model object accessible from the app-delegate
     private let queue = DispatchQueue(label: "netmonitor")
 
     @IBOutlet weak private var stackView: UIStackView!
@@ -45,6 +52,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
     // DIAGNOSTIC ENVIRONMENT VARIABLE: CFNETWORK_DIAGNOSTICS
     // set to 0, 1, 2, or 3 - increasing for more diagnostic information from CFNetwork
 
+    //TODO(heckj): move this setup to a model object accessible from the app-delegate
     private func getwifi() {
         // https://developer.apple.com/documentation/systemconfiguration/1614126-cncopycurrentnetworkinfo?language=objc
         // ref: https://stackoverflow.com/questions/31755692/swift-cncopysupportedinterfaces-not-valid
@@ -94,6 +102,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
         }
     }
 
+    //TODO(heckj): move this setup to a model object accessible from the app-delegate
     private func monitorNWPath() {
         if self.monitor == nil {
             self.monitor = NWPathMonitor(requiredInterfaceType: .wifi)
@@ -126,6 +135,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
         } // self.monitor == nil
     }
 
+    //TODO(heckj): move this setup to a model object accessible from the app-delegate
     private func setupURLSession() -> URLSession {
         let urlRequestQueue = OperationQueue()
         urlRequestQueue.name = "urlRequests"
@@ -152,9 +162,14 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
         }
         let urlRequest = URLRequest(url: url)
 
+        /*
+         In your extension delegate’s applicationWillResignActive() method, cancel any outstanding
+         tasks by calling the URLSessionTask object’s cancel() method.
+         */
+
         dataTask = session.dataTask(with: urlRequest) { data, response, error in
             // clean up after ourselves...
-            defer { self.dataTask = nil }
+            // defer { self.dataTask = nil }
 
             // check for errors
             guard error == nil else {
