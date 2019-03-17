@@ -11,6 +11,33 @@ get the dependencies established for the project:
     git submodule init
     git submodule update
 
+## Command Line Building
+
+view all the settings:
+
+    xcodebuild -showBuildSettings
+
+view the schemes and targets:
+
+    xcodebuild -list
+
+do a build:
+
+    xcodebuild -scheme CNA -sdk iphoneos12.1 -configuration Debug
+    xcodebuild -scheme CNA -sdk iphoneos12.1 -configuration Release
+
+other building:
+
+    xcodebuild -scheme Charts -sdk iphoneos12.1
+    xcodebuild -scheme Socket-Package -sdk iphoneos12.1
+    xcodebuild -scheme SwiftyPing-Package -sdk iphoneos12.1
+    xcodebuild -scheme CNA -sdk iphoneos12.1
+
+testing subprojects
+
+    xcodebuild -scheme ChartsTests -sdk iphoneos12.1
+    xcodebuild -scheme SocketPackageTests -sdk iphoneos12.1
+
 ## Developer Reading
 
 App Extensions (making a "Today" Widget)
@@ -49,6 +76,4 @@ Charting
 
 - https://github.com/annalizhaz/ChartsForSwiftBasic
 - https://github.com/danielgindi/Charts
-
-
 
