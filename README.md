@@ -21,19 +21,26 @@ view the schemes and targets:
 
     xcodebuild -list
 
+view destinations:
+
+    xcodebuild -scheme CNA -showdestinations
+
 do a build:
 
     xcodebuild -scheme CNA -sdk iphoneos12.1 -configuration Debug
     xcodebuild -scheme CNA -sdk iphoneos12.1 -configuration Release
 
-other building:
+run the tests:
+
+    xcodebuild clean test -scheme CNA -sdk iphoneos12.1 -destination 'platform=iOS Simulator,OS=12.1,name=iPhone 5s' | xcpretty --color
+
+building just the subprojects:
 
     xcodebuild -scheme Charts -sdk iphoneos12.1
     xcodebuild -scheme Socket-Package -sdk iphoneos12.1
     xcodebuild -scheme SwiftyPing-Package -sdk iphoneos12.1
-    xcodebuild -scheme CNA -sdk iphoneos12.1
 
-testing subprojects
+testing subprojects:
 
     xcodebuild -scheme ChartsTests -sdk iphoneos12.1
     xcodebuild -scheme SocketPackageTests -sdk iphoneos12.1
@@ -77,3 +84,8 @@ Charting
 - https://github.com/annalizhaz/ChartsForSwiftBasic
 - https://github.com/danielgindi/Charts
 
+Running Tests from the CLI
+
+- https://krausefx.com/blog/run-xcode-7-ui-tests-from-the-command-line
+- https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/testing_with_xcode/chapters/08-automation.html
+- https://www.mokacoding.com/blog/running-tests-from-the-terminal/
