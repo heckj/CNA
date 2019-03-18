@@ -37,7 +37,10 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
 
     // explicit dispatch queue for the NWPathMonitor
     private let queue = DispatchQueue(label: "netmonitor")
-
+    private let concurrentURLUpdateQueue =
+        DispatchQueue(
+            label: "networkAnalyzer.urlupdates",
+            attributes: .concurrent)
     // references the dataTask objects for validating URLs indexed by string/URL
     // - gives us a handle the cancel them if needed...
     private var dataTasks: [String: URLSessionDataTask]
@@ -152,9 +155,16 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
 
                 self.dataTasks[urlString] = self.testURLaccess(urlString: urlString)
                 let response = NetworkAnalyzerUrlResponse(url: urlString, status: .unknown)
-                self.dataTaskResponses[urlString] = response
-                // since we just reset this, make sure the delegate is aware...
-                self.delegate?.urlUpdate(urlresponse: response)
+                self.concurrentURLUpdateQueue.async(flags: .barrier) { [weak self] in
+                    // 1
+                    guard let self = self else {
+                        return
+                    }
+                    // store it
+                    self.dataTaskResponses[urlString] = response
+                    // and send it over to the delegate
+                    self.delegate?.urlUpdate(urlresponse: response)
+                }
             }
         }
     }
@@ -185,11 +195,17 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
                 os_log("%{public}@ error:  %{public}@",
                        log: OSLog.netcheck, type: .error, urlString, String(describing: error))
                 let updatedResponse = NetworkAnalyzerUrlResponse(url: urlString, status: .unavailable)
-                // store it locally
-                // TODO(heckj): RACE ON THE CLOSURE HERE - resolve with a Dispatch!
-                self.dataTaskResponses[urlString] = updatedResponse
-                // and send it over to the delegate
-                self.delegate?.urlUpdate(urlresponse: updatedResponse)
+
+                self.concurrentURLUpdateQueue.async(flags: .barrier) { [weak self] in
+                    // 1
+                    guard let self = self else {
+                        return
+                    }
+                    // store it
+                    self.dataTaskResponses[urlString] = updatedResponse
+                    // and send it over to the delegate
+                    self.delegate?.urlUpdate(urlresponse: updatedResponse)
+                }
                 return
             }
             // make sure we gots the data
@@ -198,10 +214,16 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
                 os_log("%{public}@ status code: %{public}d",
                        log: OSLog.netcheck, type: .error, urlString, response.statusCode)
                 let updatedResponse = NetworkAnalyzerUrlResponse(url: urlString, status: .available)
-                // store it locally
-                self.dataTaskResponses[urlString] = updatedResponse
-                // and send it over to the delegate
-                self.delegate?.urlUpdate(urlresponse: updatedResponse)
+                self.concurrentURLUpdateQueue.async(flags: .barrier) { [weak self] in
+                    // 1
+                    guard let self = self else {
+                        return
+                    }
+                    // store it
+                    self.dataTaskResponses[urlString] = updatedResponse
+                    // and send it over to the delegate
+                    self.delegate?.urlUpdate(urlresponse: updatedResponse)
+                }
             }
         }
         dataTask?.resume()
