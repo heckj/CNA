@@ -16,6 +16,9 @@ extension OSLog {
                                 category: String(describing: NetworkAnalyzer.self))
     // specifically to allow os_log to this category...
     // os_log("View did load!", log: OSLog.netcheck, type: .info)
+
+    // TO WATCH, use Console.log and limit to the string:
+    //   process:CNA category:NetworkAnalyzer
 }
 
 enum NetworkAccessible {
@@ -212,7 +215,7 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
             if data != nil,
                 let response = response as? HTTPURLResponse {
                 os_log("%{public}@ status code: %{public}d",
-                       log: OSLog.netcheck, type: .error, urlString, response.statusCode)
+                       log: OSLog.netcheck, type: OSLogType.info, urlString, response.statusCode)
                 let updatedResponse = NetworkAnalyzerUrlResponse(url: urlString, status: .available)
                 self.concurrentURLUpdateQueue.async(flags: .barrier) { [weak self] in
                     // 1

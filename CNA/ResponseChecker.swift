@@ -17,6 +17,9 @@ extension OSLog {
                                 category: String(describing: ResponseChecker.self))
     // specifically to allow os_log to this category...
     // os_log("View did load!", log: OSLog.urlcheck, type: .info)
+
+    // TO WATCH, use Console.log and limit to the string:
+    //   process:CNA category:ResponseChecker
 }
 
 enum ResponseCheckerError: Error {
