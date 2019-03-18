@@ -15,7 +15,7 @@ enum ResponseCheckerError: Error {
     case noClosureProvided
 }
 
-public typealias SocketResponseClosure = (( _ checker: ResponseChecker, _ response: Bool) -> Void)
+public typealias SocketResponseClosure = ((_ checker: ResponseChecker, _ response: Bool) -> Void)
 
 public class ResponseChecker: NSObject {
     var host: String

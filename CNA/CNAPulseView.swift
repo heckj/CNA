@@ -21,7 +21,7 @@ class CNAPulseView: UIView {
     }
 
     private func finishInit() {
-        self.backgroundColor = UIColor.clear
+        backgroundColor = UIColor.clear
 
 //        let pulseOrigin = CGPoint(x: 80, y:80)
 //        let circleView = pulseCircleView(frame:
@@ -46,7 +46,7 @@ class CNAPulseView: UIView {
 
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
+    override func draw(_: CGRect) {
         if let context = UIGraphicsGetCurrentContext() {
             context.setLineWidth(4.0)
             UIColor.blue.set()

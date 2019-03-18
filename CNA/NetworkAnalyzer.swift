@@ -71,37 +71,37 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
     //   case .unsatisfied:
     // }
     public var path: NWPath? { // read-only 'computed' property
-        return self.monitor?.currentPath
+        return monitor?.currentPath
     }
 
     public init(wifi wifiRouter: String, urlsToCheck: [String]) {
-        self.active = false
-        self.dataTasks = [:]
-        self.dataTaskResponses = [:]
-        self.urlsToValidate = urlsToCheck
+        active = false
+        dataTasks = [:]
+        dataTaskResponses = [:]
+        urlsToValidate = urlsToCheck
         self.wifiRouter = wifiRouter
-        self.checker = ResponseChecker(host: wifiRouter)
+        checker = ResponseChecker(host: wifiRouter)
         super.init()
 
-        self.session = setupURLSession()
-        self.monitor = NWPathMonitor(requiredInterfaceType: .wifi)
-        self.monitor?.pathUpdateHandler = networkPathUpdate
+        session = setupURLSession()
+        monitor = NWPathMonitor(requiredInterfaceType: .wifi)
+        monitor?.pathUpdateHandler = networkPathUpdate
     }
 
     public func start() {
         os_log("Activating network analyzer!", log: OSLog.netcheck, type: .info)
-        self.active = true
-        self.monitor?.start(queue: queue)
+        active = true
+        monitor?.start(queue: queue)
     }
 
     public func stop() {
         os_log("Deactivating network analyzer!", log: OSLog.netcheck, type: .info)
         // immediately cease all network operations in URLSession
-        self.session?.invalidateAndCancel()
-        self.monitor?.cancel()
-        self.active = false
+        session?.invalidateAndCancel()
+        monitor?.cancel()
+        active = false
         // reset the session for running again in the future
-        self.session = setupURLSession()
+        session = setupURLSession()
     }
 
     // setup and configure the URLSession for checking URLs
@@ -124,17 +124,17 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
 
     private func networkPathUpdate(_ path: NWPath) {
         // called when the network path changes
-         switch path.status {
-         case .satisfied:
+        switch path.status {
+        case .satisfied:
             os_log("NWPath update: satisfied", log: OSLog.netcheck, type: .debug)
-         case .requiresConnection:
+        case .requiresConnection:
             os_log("NWPath update: requiresConnection", log: OSLog.netcheck, type: .debug)
-         case .unsatisfied:
+        case .unsatisfied:
             os_log("NWPath update: unsatisfied", log: OSLog.netcheck, type: .debug)
-         }
+        }
 
         do {
-            self.resetAndCheckURLS()
+            resetAndCheckURLS()
             try checker.checkSocketResponse()
         } catch {
             os_log("Error while invoking socket response to the WIFI router: %{public}@",
@@ -142,7 +142,7 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
         }
     }
 
-    private func wifiPingCheckCallback(_ checker: ResponseChecker, _ result: Bool) {
+    private func wifiPingCheckCallback(_: ResponseChecker, _ result: Bool) {
         // test each of the URLs for access
         DispatchQueue.main.async { [weak self] in
             if result {
@@ -159,7 +159,7 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
     }
 
     private func resetAndCheckURLS() {
-        self.session?.reset {
+        session?.reset {
             // test each of the URLs for access
             for urlString in self.urlsToValidate {
                 let datatask = self.testURLaccess(urlString: urlString)
@@ -186,7 +186,7 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
          tasks by calling the URLSessionTask object’s cancel() method.
          */
 
-        let dataTask = self.session?.dataTask(with: urlRequest) { data, response, error in
+        let dataTask = session?.dataTask(with: urlRequest) { data, response, error in
             // clean up after ourselves...
             // defer { self.dataTask = nil }
 

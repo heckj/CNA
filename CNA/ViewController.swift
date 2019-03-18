@@ -12,47 +12,47 @@ import SystemConfiguration.CaptiveNetwork
 import UIKit
 
 class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelegate {
-    //TODO(heckj): move this setup to a model object accessible from the app-delegate
+    // TODO(heckj): move this setup to a model object accessible from the app-delegate
     private var dataTask: URLSessionDataTask?
     // URLs to check and validate
 
-    //TODO(heckj): move this setup to a model object accessible from the app-delegate
+    // TODO(heckj): move this setup to a model object accessible from the app-delegate
     private var urlsToValidate: [String] = [
         "https://www.google.com/",
         "https://www.pandora.com/",
         "https://squareup.com/",
         "https://www.eldiablocoffee.com/",
-        "https://www.facebook.com/"
+        "https://www.facebook.com/",
     ]
     private var urlLabels: [String: UILabel] = [:]
 
-    //TODO(heckj): move this setup to a model object accessible from the app-delegate
+    // TODO(heckj): move this setup to a model object accessible from the app-delegate
     private var session: URLSession?
-    //TODO(heckj): move this setup to a model object accessible from the app-delegate
+    // TODO(heckj): move this setup to a model object accessible from the app-delegate
     private var monitor: NWPathMonitor?
 
-    //TODO(heckj): move this setup to a model object accessible from the app-delegate
+    // TODO(heckj): move this setup to a model object accessible from the app-delegate
     private let queue = DispatchQueue(label: "netmonitor")
 
-    @IBOutlet weak private var stackView: UIStackView!
-    @IBOutlet weak private var overallAccessView: UIView!
-    @IBOutlet weak private var diagnosticLabel: UILabel!
-    @IBOutlet weak private var overallAccessLabel: UILabel!
-    @IBOutlet weak private var diagnosticText: UITextView!
-    @IBOutlet weak private var testButton: UIButton!
+    @IBOutlet private var stackView: UIStackView!
+    @IBOutlet private var overallAccessView: UIView!
+    @IBOutlet private var diagnosticLabel: UILabel!
+    @IBOutlet private var overallAccessLabel: UILabel!
+    @IBOutlet private var diagnosticText: UITextView!
+    @IBOutlet private var testButton: UIButton!
 
     // TEST BUTTON to force the URL checking
-    @IBAction private func doTheStuff(_ sender: UIButton) {
+    @IBAction private func doTheStuff(_: UIButton) {
         if let monitor = self.monitor {
             print("monitor path: ", monitor.currentPath.status)
         }
-        self.resetAndCheckURLS()
+        resetAndCheckURLS()
     }
 
     // DIAGNOSTIC ENVIRONMENT VARIABLE: CFNETWORK_DIAGNOSTICS
     // set to 0, 1, 2, or 3 - increasing for more diagnostic information from CFNetwork
 
-    //TODO(heckj): move this setup to a model object accessible from the app-delegate
+    // TODO(heckj): move this setup to a model object accessible from the app-delegate
     private func getwifi() {
         // https://developer.apple.com/documentation/systemconfiguration/1614126-cncopycurrentnetworkinfo?language=objc
         // ref: https://stackoverflow.com/questions/31755692/swift-cncopysupportedinterfaces-not-valid
@@ -97,16 +97,16 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
                 self?.urlLabels[urlString]?.textColor = UIColor.lightGray
             }
         }
-        for (urlString) in self.urlsToValidate {
-            self.testURLaccess(urlString: urlString)
+        for urlString in urlsToValidate {
+            testURLaccess(urlString: urlString)
         }
     }
 
-    //TODO(heckj): move this setup to a model object accessible from the app-delegate
+    // TODO(heckj): move this setup to a model object accessible from the app-delegate
     private func monitorNWPath() {
-        if self.monitor == nil {
-            self.monitor = NWPathMonitor(requiredInterfaceType: .wifi)
-            self.monitor?.pathUpdateHandler = { path in
+        if monitor == nil {
+            monitor = NWPathMonitor(requiredInterfaceType: .wifi)
+            monitor?.pathUpdateHandler = { path in
                 print("path status is ", path.status)
                 if path.status == .satisfied {
                     print(path.debugDescription, "is expensive? ", path.isExpensive, "is connected")
@@ -131,11 +131,11 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
                 }
                 self.resetAndCheckURLS()
             }
-            self.monitor?.start(queue: queue)
+            monitor?.start(queue: queue)
         } // self.monitor == nil
     }
 
-    //TODO(heckj): move this setup to a model object accessible from the app-delegate
+    // TODO(heckj): move this setup to a model object accessible from the app-delegate
     private func setupURLSession() -> URLSession {
         let urlRequestQueue = OperationQueue()
         urlRequestQueue.name = "urlRequests"
@@ -201,9 +201,9 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.session = setupURLSession()
+        session = setupURLSession()
         // Do any additional setup after loading the view, typically from a nib.
-        for (urlString) in self.urlsToValidate {
+        for urlString in urlsToValidate {
             let viewForURL = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
             viewForURL.text = urlString
             viewForURL.textColor = UIColor.gray
@@ -211,8 +211,8 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
             urlLabels[urlString] = viewForURL
             stackView.addArrangedSubview(viewForURL)
         }
-        self.getwifi()
-        self.monitorNWPath()
+        getwifi()
+        monitorNWPath()
         let checker = ResponseChecker(host: "192.168.1.1")
         checker.responseClosure = { _, result in
             // test each of the URLs for access
@@ -239,9 +239,9 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
     }
 
     // URLSessionTaskDelegate methods
-    func urlSession(_ session: URLSession,
-                    task: URLSessionTask,
-                    didFinishCollecting metrics: URLSessionTaskMetrics) {
+    func urlSession(_: URLSession,
+                    task _: URLSessionTask,
+                    didFinishCollecting _: URLSessionTaskMetrics) {
 //        // check the metrics
 //        print("task duration (ms): ", metrics.taskInterval.duration * 1000)
 //        print("redirect count was: ", metrics.redirectCount)

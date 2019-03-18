@@ -273,7 +273,8 @@
 			buildConfigurationList = 1A5AC81F223469E800D388F4 /* Build configuration list for PBXNativeTarget "CNA" */;
 			buildPhases = (
 				1A5AC7F3223469E700D388F4 /* Sources */,
-				1A65D7192234720200A6E9BE /* ShellScript */,
+				1A1CBB1D22401656002BCE42 /* Run Script (swiftformat) */,
+				1A65D7192234720200A6E9BE /* Run Script (swiftlint) */,
 				1A5AC7F4223469E700D388F4 /* Frameworks */,
 				1A5AC7F5223469E700D388F4 /* Resources */,
 				1ACB9BD422385282009DE3BE /* Embed Frameworks */,
@@ -457,7 +458,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1A65D7192234720200A6E9BE /* ShellScript */ = {
+		1A1CBB1D22401656002BCE42 /* Run Script (swiftformat) */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -466,6 +467,25 @@
 			);
 			inputPaths = (
 			);
+			name = "Run Script (swiftformat)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftformat >/dev/null; then\nswiftformat . --exclude dependencies\nelse\necho \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+		};
+		1A65D7192234720200A6E9BE /* Run Script (swiftlint) */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script (swiftlint)";
 			outputFileListPaths = (
 			);
 			outputPaths = (

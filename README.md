@@ -11,6 +11,11 @@ get the dependencies established for the project:
     git submodule init
     git submodule update
 
+build uses two secondary tools (optional really): swiftformat and swiftlint
+
+    brew install swiftlint
+    brew install swiftformat
+
 ## Command Line Building
 
 view all the settings:

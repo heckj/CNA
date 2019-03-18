@@ -12,18 +12,18 @@ import UIKit
 class CNAButton: UIButton {
     @IBInspectable var borderWidth: Int {
         set {
-            self.layer.borderWidth = CGFloat(newValue)
+            layer.borderWidth = CGFloat(newValue)
         }
         get {
-            return Int(self.layer.borderWidth)
+            return Int(layer.borderWidth)
         }
     }
 
     /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+     // Only override draw() if you perform custom drawing.
+     // An empty implementation adversely affects performance during animation.
+     override func draw(_ rect: CGRect) {
+         // Drawing code
+     }
+     */
 }
