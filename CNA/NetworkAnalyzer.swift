@@ -10,17 +10,6 @@ import Foundation
 import Network
 import os.log
 
-// WHEN DATA CHANGES:
-// - public callback for the NWPathMonitor triggering a changes
-// - callback for each URL being validated
-// Sort of an open question on which to use: a delegate pattern or a callback pattern
-// Delegate matches the "willXXX"/"didXXX" operations
-// callback can be specific to each individual URL
-
-// ideas for protocol of a delegate...
-// - new diagnostic info/network state is available
-// - urls have updated data
-
 extension OSLog {
     private static var subsystem = Bundle.main.bundleIdentifier!
     static let netcheck = OSLog(subsystem: subsystem,
@@ -53,16 +42,10 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
     // - gives us a handle the cancel them if needed...
     private var dataTasks: [String: URLSessionDataTask]
     private var dataTaskResponses: [String: NetworkAnalyzerUrlResponse]
-
     private var diagnosticText: String = "No diagnostic availaable."
 
-    //        = [
-    //        "https://www.google.com/",
-    //        "https://www.pandora.com/",
-    //        "https://squareup.com/",
-    //        "https://www.eldiablocoffee.com/",
-    //        "https://www.facebook.com/"
-    //    ]
+    weak var delegate: NetworkAnalyzerDelegate?
+
     public var urlsToValidate: [String]
     public var wifiRouter: String
 
@@ -151,7 +134,6 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
     }
 
     private func wifiPingCheckCallback(_: ResponseChecker, _ result: Bool) {
-        // test each of the URLs for access
         if result {
             diagnosticText = "The WIFI is accessible locally, so any problems with the internet "
             diagnosticText += "is 'upstream' and not local."
@@ -162,6 +144,8 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
             diagnosticText = "The WIFI is not accessible, so it's probably worth restarting the "
             diagnosticText += "WIFI router."
         }
+
+        delegate?.networkAnalysisUpdate(path: path, wifiResponse: result)
     }
 
     private func resetAndCheckURLS() {
@@ -175,7 +159,10 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
                 }
 
                 self.dataTasks[urlString] = self.testURLaccess(urlString: urlString)
-                self.dataTaskResponses[urlString] = NetworkAnalyzerUrlResponse(url: urlString, status: .unknown)
+                let response = NetworkAnalyzerUrlResponse(url: urlString, status: .unknown)
+                self.dataTaskResponses[urlString] = response
+                // since we just reset this, make sure the delegate is aware...
+                self.delegate?.urlUpdate(urlresponse: response)
             }
         }
     }
@@ -205,7 +192,11 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
             guard error == nil else {
                 os_log("%{public}@ error:  %{public}@",
                        log: OSLog.netcheck, type: .error, urlString, String(describing: error))
-                self.dataTaskResponses[urlString]?.status = .unavailable
+                let updatedResponse = NetworkAnalyzerUrlResponse(url: urlString, status: .unavailable)
+                // store it locally
+                self.dataTaskResponses[urlString] = updatedResponse
+                // and send it over to the delegate
+                self.delegate?.urlUpdate(urlresponse: updatedResponse)
                 return
             }
             // make sure we gots the data
@@ -213,7 +204,11 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
                 let response = response as? HTTPURLResponse {
                 os_log("%{public}@ status code: %{public}d",
                        log: OSLog.netcheck, type: .error, urlString, response.statusCode)
-                self.dataTaskResponses[urlString]?.status = .available
+                let updatedResponse = NetworkAnalyzerUrlResponse(url: urlString, status: .available)
+                // store it locally
+                self.dataTaskResponses[urlString] = updatedResponse
+                // and send it over to the delegate
+                self.delegate?.urlUpdate(urlresponse: updatedResponse)
             }
         }
         dataTask?.resume()

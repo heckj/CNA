@@ -17,8 +17,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
+        // TODO(heckj): convert this to application defaults
+        let wifiString = "192.168.1.1"
+        let urlList = [
+            "https://www.google.com/",
+            "https://www.pandora.com/",
+            "https://squareup.com/",
+            "https://www.eldiablocoffee.com/",
+            "https://www.facebook.com/"
+        ]
+
         if analyzer == nil {
-            analyzer = NetworkAnalyzer(wifi: "192.168.1.1", urlsToCheck: ["https://www.google.com/"])
+            analyzer = NetworkAnalyzer(wifi: wifiString, urlsToCheck: urlList)
             analyzer?.start()
         }
 

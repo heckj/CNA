@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A1CBB17223FEEB2002BCE42 /* NetworkAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1CBB16223FEEB2002BCE42 /* NetworkAnalyzer.swift */; };
+		1A1CBB1F224031D7002BCE42 /* NetworkAnalyzerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1CBB1E224031D7002BCE42 /* NetworkAnalyzerDelegate.swift */; };
 		1A5AC7FB223469E700D388F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AC7FA223469E700D388F4 /* AppDelegate.swift */; };
 		1A5AC7FD223469E700D388F4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AC7FC223469E700D388F4 /* ViewController.swift */; };
 		1A5AC800223469E700D388F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A5AC7FE223469E700D388F4 /* Main.storyboard */; };
@@ -119,6 +120,7 @@
 /* Begin PBXFileReference section */
 		1A149AE522384AD300E5168B /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = dependencies/IOSCharts/Charts.xcodeproj; sourceTree = "<group>"; };
 		1A1CBB16223FEEB2002BCE42 /* NetworkAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAnalyzer.swift; sourceTree = "<group>"; };
+		1A1CBB1E224031D7002BCE42 /* NetworkAnalyzerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAnalyzerDelegate.swift; sourceTree = "<group>"; };
 		1A36F831223476120022F18F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; lineEnding = 0; path = README.md; sourceTree = "<group>"; };
 		1A4D3215223C0B320097967A /* Socket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Socket.xcodeproj; path = dependencies/BlueSocket/Socket.xcodeproj; sourceTree = "<group>"; };
 		1A5AC7F7223469E700D388F4 /* CNA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CNA.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,6 +229,7 @@
 				1A6754A322396652005AA0E0 /* CNAButton.swift */,
 				1AA117D0223C19F400FA3901 /* ResponseChecker.swift */,
 				1A1CBB16223FEEB2002BCE42 /* NetworkAnalyzer.swift */,
+				1A1CBB1E224031D7002BCE42 /* NetworkAnalyzerDelegate.swift */,
 			);
 			path = CNA;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 				1A6754A422396652005AA0E0 /* CNAButton.swift in Sources */,
 				1A1CBB17223FEEB2002BCE42 /* NetworkAnalyzer.swift in Sources */,
 				1AA117D1223C19F400FA3901 /* ResponseChecker.swift in Sources */,
+				1A1CBB1F224031D7002BCE42 /* NetworkAnalyzerDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
