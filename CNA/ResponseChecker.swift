@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Network
 import Socket
 
 enum ResponseCheckerError: Error {
@@ -18,9 +19,8 @@ public typealias SocketResponseClosure = (( _ checker: ResponseChecker, _ respon
 
 public class ResponseChecker: NSObject {
     var host: String
-    public var responseClosure: SocketResponseClosure?
-
     public static let defaultPortToCheck: Int32 = 443
+    public var responseClosure: SocketResponseClosure?
 
     public init(host: String) {
         self.host = host
