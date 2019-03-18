@@ -11,10 +11,17 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+    var analyzer: NetworkAnalyzer?
 
     func application(_: UIApplication, didFinishLaunchingWithOptions
         _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        if analyzer == nil {
+            analyzer = NetworkAnalyzer(wifi: "192.168.1.1", urlsToCheck: ["https://www.google.com/"])
+            analyzer?.start()
+        }
+
         return true
     }
 
@@ -25,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering
         // callbacks. Games should use this method to pause the game.
+        analyzer?.stop()
     }
 
     func applicationDidEnterBackground(_: UIApplication) {
@@ -44,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was
         // inactive. If the application was previously in the background, optionally refresh
         // the user interface.
+        analyzer?.start()
     }
 
     func applicationWillTerminate(_: UIApplication) {

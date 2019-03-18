@@ -8,7 +8,16 @@
 
 import Foundation
 import Network
+import os.log
 import Socket
+
+extension OSLog {
+    private static var subsystem = Bundle.main.bundleIdentifier!
+    static let urlcheck = OSLog(subsystem: subsystem,
+                                category: String(describing: ResponseChecker.self))
+    // specifically to allow os_log to this category...
+    // os_log("View did load!", log: OSLog.urlcheck, type: .info)
+}
 
 enum ResponseCheckerError: Error {
     case oopsy(msg: String)
@@ -46,15 +55,22 @@ public class ResponseChecker: NSObject {
                 if !socket.isConnected {
                     callback(self, false)
                 }
-//                print("\nConnected to host: \(self.host):\(ResponseChecker.defaultPortToCheck)")
-//                print("\tSocket signature: \(socket.signature!.description)\n")
+                os_log("connection available to %{public}@:${public}d",
+                       log: OSLog.urlcheck, type: .info, self.host,
+                       ResponseChecker.defaultPortToCheck)
 
                 return callback(self, true)
-            } catch let error as Socket.Error {
-                print("Error while creating and connecting to socket: code \(error.errorCode) :",
-                      error)
+            } catch let socketerror as Socket.Error {
+                os_log("error connecting to %{public}@:%i : %{public}@",
+                       log: OSLog.urlcheck, type: OSLogType.error,
+                       self.host, // %@
+                       ResponseChecker.defaultPortToCheck, // %i
+                       String(describing: socketerror) // %@
+                )
             } catch {
-                print("Unknown error: \(error)")
+                os_log("Unknown error %{public}@",
+                       log: OSLog.urlcheck, type: OSLogType.error,
+                       String(describing: error))
             }
             callback(self, false)
         }

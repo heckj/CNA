@@ -17,6 +17,10 @@ import os.log
 // Delegate matches the "willXXX"/"didXXX" operations
 // callback can be specific to each individual URL
 
+// ideas for protocol of a delegate...
+// - new diagnostic info/network state is available
+// - urls have updated data
+
 extension OSLog {
     private static var subsystem = Bundle.main.bundleIdentifier!
     static let netcheck = OSLog(subsystem: subsystem,
@@ -81,7 +85,10 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
         urlsToValidate = urlsToCheck
         self.wifiRouter = wifiRouter
         checker = ResponseChecker(host: wifiRouter)
+
         super.init()
+
+        checker.responseClosure = wifiPingCheckCallback
 
         session = setupURLSession()
         monitor = NWPathMonitor(requiredInterfaceType: .wifi)
@@ -136,6 +143,7 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
         do {
             resetAndCheckURLS()
             try checker.checkSocketResponse()
+            // this cascades to ultimately result in wifiPingCheckCallback getting invoked
         } catch {
             os_log("Error while invoking socket response to the WIFI router: %{public}@",
                    log: OSLog.netcheck, type: .error, String(describing: error))
@@ -144,17 +152,15 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
 
     private func wifiPingCheckCallback(_: ResponseChecker, _ result: Bool) {
         // test each of the URLs for access
-        DispatchQueue.main.async { [weak self] in
-            if result {
-                self?.diagnosticText = "The WIFI is accessible locally, so any problems with the internet "
-                self?.diagnosticText += "is 'upstream' and not local."
-                self?.diagnosticText += "\n\n"
-                self?.diagnosticText += "If the internet is unavailable, you should contact the service "
-                self?.diagnosticText += "provider, as they don't appear to be providing a conection currently."
-            } else {
-                self?.diagnosticText = "The WIFI is not accessible, so it's probably worth restarting the "
-                self?.diagnosticText += "WIFI router."
-            }
+        if result {
+            diagnosticText = "The WIFI is accessible locally, so any problems with the internet "
+            diagnosticText += "is 'upstream' and not local."
+            diagnosticText += "\n\n"
+            diagnosticText += "If the internet is unavailable, you should contact the service "
+            diagnosticText += "provider, as they don't appear to be providing a conection currently."
+        } else {
+            diagnosticText = "The WIFI is not accessible, so it's probably worth restarting the "
+            diagnosticText += "WIFI router."
         }
     }
 
@@ -162,8 +168,13 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
         session?.reset {
             // test each of the URLs for access
             for urlString in self.urlsToValidate {
-                let datatask = self.testURLaccess(urlString: urlString)
-                self.dataTasks[urlString] = datatask
+                if self.dataTasks[urlString] != nil {
+                    // if there's already a task there, kill it and make another
+                    self.dataTasks[urlString]?.cancel()
+                    self.dataTasks[urlString] = nil
+                }
+
+                self.dataTasks[urlString] = self.testURLaccess(urlString: urlString)
                 self.dataTaskResponses[urlString] = NetworkAnalyzerUrlResponse(url: urlString, status: .unknown)
             }
         }
