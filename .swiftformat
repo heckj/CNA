@@ -1,3 +1,8 @@
+# file options
+
+--exclude dependencies
+
+# format options
 --allman false
 --binarygrouping none
 --closingparen same-line
@@ -25,6 +30,15 @@
 --semicolons inline
 --stripunusedargs closure-only
 --trailingclosures
---trimwhitespace
+--trimwhitespace always
 --wraparguments preserve
 --wrapcollections preserve
+
+# rules
+
+--enable isEmpty
+--enable blankLinesBetweenScopes
+--enable sortedImports
+--enable todos
+--enable blankLinesAroundMark
+--enable linebreakAtEndOfFile

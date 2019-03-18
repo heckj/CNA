@@ -50,10 +50,12 @@ public class ResponseChecker: NSObject {
 //                print("\tSocket signature: \(socket.signature!.description)\n")
 
                 return callback(self, true)
-            } catch let error as Socket.Error {
+            }
+            catch let error as Socket.Error {
                 print("Error while creating and connecting to socket: code \(error.errorCode) :",
                       error)
-            } catch {
+            }
+            catch {
                 print("Unknown error: \(error)")
             }
             callback(self, false)
