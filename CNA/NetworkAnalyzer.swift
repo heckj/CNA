@@ -42,7 +42,6 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
     // - gives us a handle the cancel them if needed...
     private var dataTasks: [String: URLSessionDataTask]
     private var dataTaskResponses: [String: NetworkAnalyzerUrlResponse]
-    private var diagnosticText: String = "No diagnostic availaable."
 
     weak var delegate: NetworkAnalyzerDelegate?
 
@@ -94,6 +93,10 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
         session = setupURLSession()
     }
 
+    public func checkURLs() {
+        resetAndCheckURLS()
+    }
+
     // setup and configure the URLSession for checking URLs
     private func setupURLSession() -> URLSession {
         let urlRequestQueue = OperationQueue()
@@ -134,17 +137,6 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
     }
 
     private func wifiPingCheckCallback(_: ResponseChecker, _ result: Bool) {
-        if result {
-            diagnosticText = "The WIFI is accessible locally, so any problems with the internet "
-            diagnosticText += "is 'upstream' and not local."
-            diagnosticText += "\n\n"
-            diagnosticText += "If the internet is unavailable, you should contact the service "
-            diagnosticText += "provider, as they don't appear to be providing a conection currently."
-        } else {
-            diagnosticText = "The WIFI is not accessible, so it's probably worth restarting the "
-            diagnosticText += "WIFI router."
-        }
-
         delegate?.networkAnalysisUpdate(path: path, wifiResponse: result)
     }
 
