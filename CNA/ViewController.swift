@@ -11,7 +11,7 @@ import Network
 import SystemConfiguration.CaptiveNetwork
 import UIKit
 
-class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelegate {
+class ViewController: UIViewController, URLSessionDelegate {
     // TODO(heckj): move this setup to a model object accessible from the app-delegate
     private var dataTask: URLSessionDataTask?
     // URLs to check and validate
@@ -201,6 +201,11 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // swiftlint:disable:next force_cast
+        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        print(appdelegate.analyzer as Any)
+
         session = setupURLSession()
         // Do any additional setup after loading the view, typically from a nib.
         for urlString in urlsToValidate {
@@ -236,35 +241,5 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
         } catch {
             print("something bad happened with the socket check: ", error)
         }
-    }
-
-    // URLSessionTaskDelegate methods
-    func urlSession(_: URLSession,
-                    task _: URLSessionTask,
-                    didFinishCollecting _: URLSessionTaskMetrics) {
-//        // check the metrics
-//        print("task duration (ms): ", metrics.taskInterval.duration * 1000)
-//        print("redirect count was: ", metrics.redirectCount)
-//        print("details...")
-//        let transactionMetricsList = metrics.transactionMetrics
-//        for metric in transactionMetricsList {
-//            print("request ", metric.request.debugDescription)
-//            print("fetchStart ", metric.fetchStartDate!)
-//            // some of the rest of this may not actually exist if the request fails... need to check nils...
-//
-//            if let domainStart = metric.domainLookupStartDate,
-//                let domainEnd = metric.domainLookupEndDate,
-//                let connectStart = metric.connectStartDate,
-//                let connectEnd = metric.connectEndDate,
-//                let requestStart = metric.connectStartDate,
-//                let requestEnd = metric.connectEndDate,
-//                let responseStart = metric.responseStartDate,
-//                let responseEnd = metric.responseEndDate {
-//                print("domainDuration (ms) ", domainEnd.timeIntervalSince(domainStart) * 1000)
-//                print("connectDuration (ms) ", connectEnd.timeIntervalSince(connectStart) * 1000)
-//                print("requestDuration (ms) ", requestEnd.timeIntervalSince(requestStart) * 1000)
-//                print("responseDuration (ms) ", responseEnd.timeIntervalSince(responseStart) * 1000)
-//            }
-//        }
     }
 }

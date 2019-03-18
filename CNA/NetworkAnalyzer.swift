@@ -194,6 +194,7 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
                        log: OSLog.netcheck, type: .error, urlString, String(describing: error))
                 let updatedResponse = NetworkAnalyzerUrlResponse(url: urlString, status: .unavailable)
                 // store it locally
+                // TODO(heckj): RACE ON THE CLOSURE HERE - resolve with a Dispatch!
                 self.dataTaskResponses[urlString] = updatedResponse
                 // and send it over to the delegate
                 self.delegate?.urlUpdate(urlresponse: updatedResponse)
@@ -213,5 +214,36 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
         }
         dataTask?.resume()
         return dataTask
+    }
+
+    // MARK: URLSessionTaskDelegate methods
+
+    func urlSession(_: URLSession,
+                    task _: URLSessionTask,
+                    didFinishCollecting _: URLSessionTaskMetrics) {
+        //        // check the metrics
+        //        print("task duration (ms): ", metrics.taskInterval.duration * 1000)
+        //        print("redirect count was: ", metrics.redirectCount)
+        //        print("details...")
+        //        let transactionMetricsList = metrics.transactionMetrics
+        //        for metric in transactionMetricsList {
+        //            print("request ", metric.request.debugDescription)
+        //            print("fetchStart ", metric.fetchStartDate!)
+        //            // some of the rest of this may not actually exist if the request fails... need to check nils...
+        //
+        //            if let domainStart = metric.domainLookupStartDate,
+        //                let domainEnd = metric.domainLookupEndDate,
+        //                let connectStart = metric.connectStartDate,
+        //                let connectEnd = metric.connectEndDate,
+        //                let requestStart = metric.connectStartDate,
+        //                let requestEnd = metric.connectEndDate,
+        //                let responseStart = metric.responseStartDate,
+        //                let responseEnd = metric.responseEndDate {
+        //                print("domainDuration (ms) ", domainEnd.timeIntervalSince(domainStart) * 1000)
+        //                print("connectDuration (ms) ", connectEnd.timeIntervalSince(connectStart) * 1000)
+        //                print("requestDuration (ms) ", requestEnd.timeIntervalSince(requestStart) * 1000)
+        //                print("responseDuration (ms) ", responseEnd.timeIntervalSince(responseStart) * 1000)
+        //            }
+        //        }
     }
 }
