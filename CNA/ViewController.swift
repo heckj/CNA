@@ -118,8 +118,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
                             self?.diagnosticLabel.isHidden = true
                         })
                     }
-                }
-                else {
+                } else {
                     print(path.debugDescription, "is expensive? ", path.isExpensive, "is disconnected")
                     DispatchQueue.main.async { [weak self] in
                         self?.overallAccessLabel.text = "No Internet access"
@@ -226,8 +225,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
                     self?.diagnosticText.text += "\n\n"
                     self?.diagnosticText.text += "If the internet is unavailable, you should contact the service "
                     self?.diagnosticText.text += "provider, as they don't appear to be providing a conection currently."
-                }
-                else {
+                } else {
                     self?.diagnosticText.text = "The WIFI is not accessible, so it's probably worth restarting the "
                     self?.diagnosticText.text += "WIFI router."
                 }
@@ -235,8 +233,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionTaskDelega
         }
         do {
             try checker.checkSocketResponse()
-        }
-        catch {
+        } catch {
             print("something bad happened with the socket check: ", error)
         }
     }

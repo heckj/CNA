@@ -136,8 +136,7 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
         do {
             resetAndCheckURLS()
             try checker.checkSocketResponse()
-        }
-        catch {
+        } catch {
             os_log("Error while invoking socket response to the WIFI router: %{public}@",
                    log: OSLog.netcheck, type: .error, String(describing: error))
         }
@@ -152,8 +151,7 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
                 self?.diagnosticText += "\n\n"
                 self?.diagnosticText += "If the internet is unavailable, you should contact the service "
                 self?.diagnosticText += "provider, as they don't appear to be providing a conection currently."
-            }
-            else {
+            } else {
                 self?.diagnosticText = "The WIFI is not accessible, so it's probably worth restarting the "
                 self?.diagnosticText += "WIFI router."
             }
