@@ -20,6 +20,7 @@
 		1AA117D1223C19F400FA3901 /* ResponseChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA117D0223C19F400FA3901 /* ResponseChecker.swift */; };
 		1AA117D2223C19F400FA3901 /* ResponseChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA117D0223C19F400FA3901 /* ResponseChecker.swift */; };
 		1AABE5C6224147BC0070E85C /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABE5C5224147BC0070E85C /* UserDefaultKeys.swift */; };
+		1AABE5CD224149730070E85C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1AABE5CC224149730070E85C /* Settings.bundle */; };
 		1ACB9BD022385281009DE3BE /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A149AEB22384AD300E5168B /* Charts.framework */; };
 		1ACB9BD122385281009DE3BE /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1A149AEB22384AD300E5168B /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1ACFF28E223C14AD000921E6 /* SwiftyPing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ACFF28C223C131E000921E6 /* SwiftyPing.framework */; };
@@ -140,6 +141,7 @@
 		1A6754A322396652005AA0E0 /* CNAButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNAButton.swift; sourceTree = "<group>"; };
 		1AA117D0223C19F400FA3901 /* ResponseChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseChecker.swift; sourceTree = "<group>"; };
 		1AABE5C5224147BC0070E85C /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
+		1AABE5CC224149730070E85C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		1ACFF281223C131E000921E6 /* SwiftyPing.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyPing.xcodeproj; path = dependencies/SwiftyPing/SwiftyPing.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -218,6 +220,7 @@
 		1A5AC7F9223469E700D388F4 /* CNA */ = {
 			isa = PBXGroup;
 			children = (
+				1AABE5CC224149730070E85C /* Settings.bundle */,
 				1A65D7182234713500A6E9BE /* CNA.entitlements */,
 				1A5AC7FA223469E700D388F4 /* AppDelegate.swift */,
 				1AABE5C5224147BC0070E85C /* UserDefaultKeys.swift */,
@@ -440,6 +443,7 @@
 			files = (
 				1A5AC802223469E800D388F4 /* Assets.xcassets in Resources */,
 				1A5AC800223469E700D388F4 /* Main.storyboard in Resources */,
+				1AABE5CD224149730070E85C /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
