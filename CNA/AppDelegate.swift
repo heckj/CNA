@@ -17,15 +17,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
-        // TODO(heckj): convert this to application defaults
-        let wifiString = "192.168.1.1"
-        let urlList = [
-            "https://www.google.com/",
-            "https://www.pandora.com/",
-            "https://squareup.com/",
-            "https://www.eldiablocoffee.com/",
-            "https://www.facebook.com/"
-        ]
+        /// Here you can give default values to your UserDefault keys
+        UserDefaults.standard.register(defaults: [
+            UserDefaultKeys.urlList: [
+                "https://www.google.com/",
+                "https://www.pandora.com/",
+                "https://squareup.com/",
+                "https://www.eldiablocoffee.com/",
+                "https://www.facebook.com/"
+            ],
+            UserDefaultKeys.wifiRouter: "192.168.1.1"
+        ])
+
+        guard let wifiString = UserDefaults.standard.string(forKey: UserDefaultKeys.wifiRouter) else {
+            print("ERROR LOADING USER DEFAULT")
+            return false
+        }
+
+        guard let urlList = UserDefaults.standard.stringArray(forKey: UserDefaultKeys.urlList) else {
+            print("ERROR LOADING USER DEFAULT")
+            return false
+        }
 
         if analyzer == nil {
             analyzer = NetworkAnalyzer(wifi: wifiString, urlsToCheck: urlList)
