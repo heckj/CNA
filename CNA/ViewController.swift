@@ -6,7 +6,6 @@
 //  Copyright © 2019 Joseph Heck. All rights reserved.
 //
 
-import Charts
 import Network
 import SystemConfiguration.CaptiveNetwork
 import UIKit
@@ -73,6 +72,8 @@ class ViewController: UIViewController, NetworkAnalyzerDelegate {
                         self?.diagnosticLabel.isHidden = false
                     })
                 }
+            @unknown default:
+                fatalError("unknown path status response")
             }
         }
     }

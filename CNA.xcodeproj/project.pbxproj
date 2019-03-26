@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1A1CBB17223FEEB2002BCE42 /* NetworkAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1CBB16223FEEB2002BCE42 /* NetworkAnalyzer.swift */; };
 		1A1CBB1F224031D7002BCE42 /* NetworkAnalyzerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1CBB1E224031D7002BCE42 /* NetworkAnalyzerDelegate.swift */; };
+		1A241832224AA235007C9501 /* Socket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4D321E223C0B330097967A /* Socket.framework */; };
+		1A241833224AA235007C9501 /* Socket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4D321E223C0B330097967A /* Socket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1A5AC7FB223469E700D388F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AC7FA223469E700D388F4 /* AppDelegate.swift */; };
 		1A5AC7FD223469E700D388F4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AC7FC223469E700D388F4 /* ViewController.swift */; };
 		1A5AC800223469E700D388F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A5AC7FE223469E700D388F4 /* Main.storyboard */; };
@@ -21,28 +23,15 @@
 		1AA117D2223C19F400FA3901 /* ResponseChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA117D0223C19F400FA3901 /* ResponseChecker.swift */; };
 		1AABE5C6224147BC0070E85C /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABE5C5224147BC0070E85C /* UserDefaultKeys.swift */; };
 		1AABE5CD224149730070E85C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1AABE5CC224149730070E85C /* Settings.bundle */; };
-		1ACB9BD022385281009DE3BE /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A149AEB22384AD300E5168B /* Charts.framework */; };
-		1ACB9BD122385281009DE3BE /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1A149AEB22384AD300E5168B /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1ACFF28E223C14AD000921E6 /* SwiftyPing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ACFF28C223C131E000921E6 /* SwiftyPing.framework */; };
-		1ACFF28F223C14AD000921E6 /* SwiftyPing.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1ACFF28C223C131E000921E6 /* SwiftyPing.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1ACFF292223C14B5000921E6 /* Socket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4D321E223C0B330097967A /* Socket.framework */; };
-		1ACFF293223C14B5000921E6 /* Socket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4D321E223C0B330097967A /* Socket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1A149AEA22384AD300E5168B /* PBXContainerItemProxy */ = {
+		1A241834224AA235007C9501 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 1A149AE522384AD300E5168B /* Charts.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 65AD9E95D9ED4DC0BD73A743;
-			remoteInfo = Charts;
-		};
-		1A149AEC22384AD300E5168B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1A149AE522384AD300E5168B /* Charts.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1CBBC58C6CE1EBEE9852CE41;
-			remoteInfo = ChartsTests;
+			containerPortal = 1A4D3215223C0B320097967A /* Socket.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "Socket::Socket";
+			remoteInfo = Socket;
 		};
 		1A4D321D223C0B330097967A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -72,46 +61,16 @@
 			remoteGlobalIDString = 1A5AC7F6223469E700D388F4;
 			remoteInfo = "Coffeeshop Network Advisor";
 		};
-		1ACB9BD222385281009DE3BE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1A149AE522384AD300E5168B /* Charts.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = A58A4ED274A941CA248EA921;
-			remoteInfo = Charts;
-		};
-		1ACFF28B223C131E000921E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1ACFF281223C131E000921E6 /* SwiftyPing.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "SwiftyPing::SwiftyPing::Product";
-			remoteInfo = SwiftyPing;
-		};
-		1ACFF290223C14AD000921E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1ACFF281223C131E000921E6 /* SwiftyPing.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = "SwiftyPing::SwiftyPing";
-			remoteInfo = SwiftyPing;
-		};
-		1ACFF294223C14B5000921E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1A4D3215223C0B320097967A /* Socket.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = "Socket::Socket";
-			remoteInfo = Socket;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		1ACB9BD422385282009DE3BE /* Embed Frameworks */ = {
+		1A241836224AA235007C9501 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1ACFF293223C14B5000921E6 /* Socket.framework in Embed Frameworks */,
-				1ACFF28F223C14AD000921E6 /* SwiftyPing.framework in Embed Frameworks */,
-				1ACB9BD122385281009DE3BE /* Charts.framework in Embed Frameworks */,
+				1A241833224AA235007C9501 /* Socket.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,7 +78,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1A149AE522384AD300E5168B /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = dependencies/IOSCharts/Charts.xcodeproj; sourceTree = "<group>"; };
 		1A1CBB16223FEEB2002BCE42 /* NetworkAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAnalyzer.swift; sourceTree = "<group>"; };
 		1A1CBB1E224031D7002BCE42 /* NetworkAnalyzerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAnalyzerDelegate.swift; sourceTree = "<group>"; };
 		1A36F831223476120022F18F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; lineEnding = 0; path = README.md; sourceTree = "<group>"; };
@@ -142,7 +100,6 @@
 		1AA117D0223C19F400FA3901 /* ResponseChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseChecker.swift; sourceTree = "<group>"; };
 		1AABE5C5224147BC0070E85C /* UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
 		1AABE5CC224149730070E85C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		1ACFF281223C131E000921E6 /* SwiftyPing.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyPing.xcodeproj; path = dependencies/SwiftyPing/SwiftyPing.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,9 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1ACFF292223C14B5000921E6 /* Socket.framework in Frameworks */,
-				1ACFF28E223C14AD000921E6 /* SwiftyPing.framework in Frameworks */,
-				1ACB9BD022385281009DE3BE /* Charts.framework in Frameworks */,
+				1A241832224AA235007C9501 /* Socket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,15 +128,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1A149AE622384AD300E5168B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				1A149AEB22384AD300E5168B /* Charts.framework */,
-				1A149AED22384AD300E5168B /* ChartsTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		1A4D3216223C0B320097967A /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,9 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				1A36F831223476120022F18F /* README.md */,
-				1ACFF281223C131E000921E6 /* SwiftyPing.xcodeproj */,
 				1A4D3215223C0B320097967A /* Socket.xcodeproj */,
-				1A149AE522384AD300E5168B /* Charts.xcodeproj */,
 				1A5AC7F9223469E700D388F4 /* CNA */,
 				1A5AC80E223469E800D388F4 /* CNATests */,
 				1A5AC819223469E800D388F4 /* CNAUITests */,
@@ -262,14 +206,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		1ACFF282223C131E000921E6 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				1ACFF28C223C131E000921E6 /* SwiftyPing.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -282,14 +218,12 @@
 				1A65D7192234720200A6E9BE /* Run Script (swiftlint) */,
 				1A5AC7F4223469E700D388F4 /* Frameworks */,
 				1A5AC7F5223469E700D388F4 /* Resources */,
-				1ACB9BD422385282009DE3BE /* Embed Frameworks */,
+				1A241836224AA235007C9501 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1ACB9BD322385281009DE3BE /* PBXTargetDependency */,
-				1ACFF291223C14AD000921E6 /* PBXTargetDependency */,
-				1ACFF295223C14B5000921E6 /* PBXTargetDependency */,
+				1A241835224AA235007C9501 /* PBXTargetDependency */,
 			);
 			name = CNA;
 			productName = "Coffeeshop Network Advisor";
@@ -345,6 +279,7 @@
 				TargetAttributes = {
 					1A5AC7F6223469E700D388F4 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						SystemCapabilities = {
 							com.apple.AccessWiFi = {
 								enabled = 1;
@@ -356,10 +291,12 @@
 					};
 					1A5AC80A223469E800D388F4 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = 1A5AC7F6223469E700D388F4;
 					};
 					1A5AC815223469E800D388F4 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = 1A5AC7F6223469E700D388F4;
 					};
 				};
@@ -377,16 +314,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 1A149AE622384AD300E5168B /* Products */;
-					ProjectRef = 1A149AE522384AD300E5168B /* Charts.xcodeproj */;
-				},
-				{
 					ProductGroup = 1A4D3216223C0B320097967A /* Products */;
 					ProjectRef = 1A4D3215223C0B320097967A /* Socket.xcodeproj */;
-				},
-				{
-					ProductGroup = 1ACFF282223C131E000921E6 /* Products */;
-					ProjectRef = 1ACFF281223C131E000921E6 /* SwiftyPing.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -399,20 +328,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		1A149AEB22384AD300E5168B /* Charts.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Charts.framework;
-			remoteRef = 1A149AEA22384AD300E5168B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		1A149AED22384AD300E5168B /* ChartsTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = ChartsTests.xctest;
-			remoteRef = 1A149AEC22384AD300E5168B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		1A4D321E223C0B330097967A /* Socket.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -425,13 +340,6 @@
 			fileType = wrapper.cfbundle;
 			path = SocketTests.xctest;
 			remoteRef = 1A4D321F223C0B330097967A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		1ACFF28C223C131E000921E6 /* SwiftyPing.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftyPing.framework;
-			remoteRef = 1ACFF28B223C131E000921E6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -538,6 +446,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1A241835224AA235007C9501 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Socket;
+			targetProxy = 1A241834224AA235007C9501 /* PBXContainerItemProxy */;
+		};
 		1A5AC80D223469E800D388F4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1A5AC7F6223469E700D388F4 /* CNA */;
@@ -547,21 +460,6 @@
 			isa = PBXTargetDependency;
 			target = 1A5AC7F6223469E700D388F4 /* CNA */;
 			targetProxy = 1A5AC817223469E800D388F4 /* PBXContainerItemProxy */;
-		};
-		1ACB9BD322385281009DE3BE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Charts;
-			targetProxy = 1ACB9BD222385281009DE3BE /* PBXContainerItemProxy */;
-		};
-		1ACFF291223C14AD000921E6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftyPing;
-			targetProxy = 1ACFF290223C14AD000921E6 /* PBXContainerItemProxy */;
-		};
-		1ACFF295223C14B5000921E6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Socket;
-			targetProxy = 1ACFF294223C14B5000921E6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -636,7 +534,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = CNA/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -699,7 +597,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = CNA/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -718,14 +616,14 @@
 				CODE_SIGN_ENTITLEMENTS = CNA/CNA.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BDV4VC27D3;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rhonabwy.Coffeeshop-Network-Advisor";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -738,14 +636,14 @@
 				CODE_SIGN_ENTITLEMENTS = CNA/CNA.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BDV4VC27D3;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rhonabwy.Coffeeshop-Network-Advisor";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -765,7 +663,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rhonabwy.Coffeeshop-Network-AdvisorTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CNA.app/CNA";
 			};
@@ -786,7 +684,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rhonabwy.Coffeeshop-Network-AdvisorTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CNA.app/CNA";
 			};
@@ -807,7 +705,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rhonabwy.Coffeeshop-Network-AdvisorUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = CNA;
 			};
@@ -828,7 +726,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rhonabwy.Coffeeshop-Network-AdvisorUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = CNA;
 			};
