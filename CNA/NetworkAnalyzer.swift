@@ -130,6 +130,8 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
             os_log("NWPath update: requiresConnection", log: OSLog.netcheck, type: .debug)
         case .unsatisfied:
             os_log("NWPath update: unsatisfied", log: OSLog.netcheck, type: .debug)
+        @unknown default:
+            fatalError("unknown and unexpected NWPathMonitor path update")
         }
 
         do {

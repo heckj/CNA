@@ -1,9 +1,3 @@
-[submodule "dependencies/IOSCharts"]
-	path = dependencies/IOSCharts
-	url = git@github.com:heckj/IOSCharts.git
 [submodule "dependencies/BlueSocket"]
 	path = dependencies/BlueSocket
 	url = git@github.com:heckj/BlueSocket.git
-[submodule "dependencies/SwiftyPing"]
-	path = dependencies/SwiftyPing
-	url = git@github.com:heckj/SwiftyPing.git
