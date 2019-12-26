@@ -34,7 +34,7 @@ struct NetworkAnalyzerUrlResponse {
 
 public class NetworkAnalyzer: NSObject, URLSessionDelegate {
     private var active: Bool
-    private var checker: ResponseChecker
+//    private var checker: ResponseChecker
     private var session: URLSession?
     private var monitor: NWPathMonitor?
 
@@ -72,11 +72,11 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
         dataTaskResponses = [:]
         urlsToValidate = urlsToCheck
         self.wifiRouter = wifiRouter
-        checker = ResponseChecker(host: wifiRouter)
+//        checker = ResponseChecker(host: wifiRouter)
 
         super.init()
 
-        checker.responseClosure = wifiPingCheckCallback
+//        checker.responseClosure = wifiPingCheckCallback
 
         session = setupURLSession()
         monitor = NWPathMonitor(requiredInterfaceType: .wifi)
@@ -113,7 +113,7 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
         configuration.timeoutIntervalForResource = 5
         configuration.allowsCellularAccess = false
         configuration.waitsForConnectivity = false
-        configuration.tlsMinimumSupportedProtocol = .sslProtocolAll
+//        configuration.tlsMinimumSupportedProtocol = .sslProtocolAll // deprecated in iOS 13.0
         return URLSession(configuration: configuration,
                           delegate: self,
                           delegateQueue: urlRequestQueue)
@@ -136,17 +136,18 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
 
         do {
             resetAndCheckURLS()
-            try checker.checkSocketResponse()
+//            try checker.checkSocketResponse()
             // this cascades to ultimately result in wifiPingCheckCallback getting invoked
-        } catch {
-            os_log("Error while invoking socket response to the WIFI router: %{public}@",
-                   log: OSLog.netcheck, type: .error, String(describing: error))
         }
+//        catch {
+//            os_log("Error while invoking socket response to the WIFI router: %{public}@",
+//                   log: OSLog.netcheck, type: .error, String(describing: error))
+//        }
     }
 
-    private func wifiPingCheckCallback(_: ResponseChecker, _ result: Bool) {
-        delegate?.networkAnalysisUpdate(path: path, wifiResponse: result)
-    }
+//    private func wifiPingCheckCallback(_: ResponseChecker, _ result: Bool) {
+//        delegate?.networkAnalysisUpdate(path: path, wifiResponse: result)
+//    }
 
     private func resetAndCheckURLS() {
         session?.reset {

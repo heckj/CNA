@@ -32,23 +32,12 @@ view destinations:
 
 do a build:
 
-    xcodebuild -scheme CNA -sdk iphoneos12.1 -configuration Debug
-    xcodebuild -scheme CNA -sdk iphoneos12.1 -configuration Release
+    xcodebuild -scheme CNA -sdk iphoneos13.2 -configuration Debug
+    xcodebuild -scheme CNA -sdk iphoneos13.2 -configuration Release
 
 run the tests:
 
-    xcodebuild clean test -scheme CNA -sdk iphoneos12.1 -destination 'platform=iOS Simulator,OS=12.1,name=iPhone 5s' | xcpretty --color
-
-building just the subprojects:
-
-    xcodebuild -scheme Charts -sdk iphoneos12.1
-    xcodebuild -scheme Socket-Package -sdk iphoneos12.1
-    xcodebuild -scheme SwiftyPing-Package -sdk iphoneos12.1
-
-testing subprojects:
-
-    xcodebuild -scheme ChartsTests -sdk iphoneos12.1
-    xcodebuild -scheme SocketPackageTests -sdk iphoneos12.1
+    xcodebuild clean test -scheme CNA -sdk iphoneos13.2 -destination 'platform=iOS Simulator,OS=13.3,name=iPhone 8'
 
 ## Developer Reading
 

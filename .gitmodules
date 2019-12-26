@@ -1,3 +1,0 @@
-[submodule "dependencies/BlueSocket"]
-	path = dependencies/BlueSocket
-	url = git@github.com:heckj/BlueSocket.git
