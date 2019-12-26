@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,7 @@
 		1A5AC802223469E800D388F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A5AC801223469E800D388F4 /* Assets.xcassets */; };
 		1A5AC810223469E800D388F4 /* CoffeeshopNetworkAdvisorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AC80F223469E800D388F4 /* CoffeeshopNetworkAdvisorTests.swift */; };
 		1A5AC81B223469E800D388F4 /* CoffeeshopNetworkAdvisorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AC81A223469E800D388F4 /* CoffeeshopNetworkAdvisorUITests.swift */; };
+		1A671C1F23B56A1000F4880F /* Socket in Frameworks */ = {isa = PBXBuildFile; productRef = 1A671C1E23B56A1000F4880F /* Socket */; };
 		1A6754A222395B4F005AA0E0 /* CNAPulseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6754A122395B4F005AA0E0 /* CNAPulseView.swift */; };
 		1A6754A422396652005AA0E0 /* CNAButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6754A322396652005AA0E0 /* CNAButton.swift */; };
 		1AA117D1223C19F400FA3901 /* ResponseChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA117D0223C19F400FA3901 /* ResponseChecker.swift */; };
@@ -82,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A671C1F23B56A1000F4880F /* Socket in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +192,7 @@
 			);
 			name = CNA;
 			packageProductDependencies = (
+				1A671C1E23B56A1000F4880F /* Socket */,
 			);
 			productName = "Coffeeshop Network Advisor";
 			productReference = 1A5AC7F7223469E700D388F4 /* CNA.app */;
@@ -276,6 +279,7 @@
 			);
 			mainGroup = 1A5AC7EE223469E700D388F4;
 			packageReferences = (
+				1A671C1D23B56A1000F4880F /* XCRemoteSwiftPackageReference "BlueSocket" */,
 			);
 			productRefGroup = 1A5AC7F8223469E700D388F4 /* Products */;
 			projectDirPath = "";
@@ -705,6 +709,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1A671C1D23B56A1000F4880F /* XCRemoteSwiftPackageReference "BlueSocket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/IBM-Swift/BlueSocket.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.52;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1A671C1E23B56A1000F4880F /* Socket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1A671C1D23B56A1000F4880F /* XCRemoteSwiftPackageReference "BlueSocket" */;
+			productName = Socket;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1A5AC7EF223469E700D388F4 /* Project object */;
 }
