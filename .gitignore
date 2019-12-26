@@ -2,5 +2,6 @@ Packages
 .build
 build/
 xcuserdata
+CNA.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/
 DerivedData/
 .DS_Store

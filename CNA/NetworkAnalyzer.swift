@@ -113,7 +113,7 @@ public class NetworkAnalyzer: NSObject, URLSessionDelegate {
         configuration.timeoutIntervalForResource = 5
         configuration.allowsCellularAccess = false
         configuration.waitsForConnectivity = false
-        configuration.tlsMinimumSupportedProtocol = .sslProtocolAll
+//        configuration.tlsMinimumSupportedProtocol = .sslProtocolAll // deprecated in iOS 13.0
         return URLSession(configuration: configuration,
                           delegate: self,
                           delegateQueue: urlRequestQueue)
